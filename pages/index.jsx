@@ -135,7 +135,7 @@ export default function Home() {
             />
           </SwiperSlide>
         </Swiper>
-        <button>Поласувати</button>
+        <button>Поласувати Нове</button>
       </section>
     </>
   );
