@@ -19,8 +19,8 @@ export default function Home() {
       <MyHead title="Головна" />
       <Header />
       <Banner />
-      <main className="p-20 bg-bodily h-[480px] justify-between flex">
-        <div className="text-dark-brown tracking-[-0.02em]">
+      <main className="py-20 xl:p-20 bg-bodily justify-center flex"> {/* 1400px */}
+        <div className="w-[680px] xl:w-auto 2xl:w-[700px] mx-auto xl:mx-0 text-dark-brown tracking-[-0.02em]">
           <h1 className="text-6xl font-ubuntu font-medium">
             Сушене м&apos;ясо від Юлі!
           </h1>
@@ -38,14 +38,14 @@ export default function Home() {
         <Image
           src="/imgs/main.png"
           alt=""
-          className="h-80"
+          className="h-[19.8vw] hidden 2xl:h-[22vw] 2xl:max-h-[20rem] xl:block"
           width="607"
           height="320"
         />
       </main>
 
       {/* Т Р Е Н Д И */}
-      <section className="mb-80 px-20">
+      <section className="px-20">
         <div className="flex mt-16">
           <Image
             src="icons/black-fire.svg"
@@ -135,8 +135,34 @@ export default function Home() {
             />
           </SwiperSlide>
         </Swiper>
-        <button>Поласувати Нове</button>
+        <Link href="/shop" className="w-fit mx-auto my-6 block">
+          <button className="w-80 h-20 hover:bg-my-black border-[7px] rounded-full border-my-black font-ubuntu font-bold text-3xl text-my-black hover:text-my-white tracking-[0.07em]">
+            Поласувати
+          </button>
+        </Link>
+      </section>
+
+      {/* В И К О Р И С Т А Н Н Я */}
+      <section>
+        <HowToUse
+          title="Подорожі та походи"
+          text="Сушене м'ясо є ідеальною їжею для подорожей, походів та кемпінгу. Воно легке, не потребує охолодження і забезпечує високий рівень білка та енергії, необхідні під час активного відпочинку"
+          bg='imgs/use-1.png'
+        />
       </section>
     </>
+  );
+}
+
+function HowToUse({ title, text, bg, img }) {
+  return (
+    <div className="relative">
+      <div style={{background: `url(${bg})`}} className='h-96 !bg-center !bg-cover'>
+        <h3>{title}</h3>
+        <p>{text}</p>
+        {img ? <Image src={img} /> : <></>}
+      </div>
+      <div className="h-96 w-full top-0 absolute bg-gradient-to-r from-[#00000080] from-36% [#77777700]" />
+    </div>
   );
 }

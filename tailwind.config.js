@@ -26,6 +26,14 @@ module.exports = {
         "pt-sans-narrow": ["PT Sans Narrow", "sans-serif"],
       },
     },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'ml': '960px',
+      'lg': '1041px',
+      'xl': '1280px',
+      '2xl': '1401px',
+    },
   },
   plugins: [],
 };
