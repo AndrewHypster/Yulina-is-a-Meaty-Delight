@@ -26,7 +26,7 @@ export default function Header({ path = "" }) {
         <Link href="mailto:info@gmail.com">info@gmail.com</Link>
       </address>
 
-      <div style={{backgroundImage: `url(${path}icons/menu.svg)`}} className='w-8 h-8 bg-cover cursor-pointer hover:brightness-[3]' />
+      <div style={{backgroundImage: `url(${path}icons/menu.svg)`}} className='w-8 h-8 bg-cover cursor-pointer hover:brightness-[3] ml:hidden' />
     </header>
   );
 }

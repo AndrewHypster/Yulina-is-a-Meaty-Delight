@@ -13,7 +13,15 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 
+import { useEffect, useState } from "react";
+
 export default function Home() {
+  const [slides, setSlides] = useState(4);
+  useEffect(() => {
+    if (window.innerWidth <= 1250) setSlides(3)
+    if (window.innerWidth <= 980) setSlides(2)
+  }, []);
+
   return (
     <>
       <MyHead title="Головна" />
@@ -67,7 +75,7 @@ export default function Home() {
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           spaceBetween={0}
-          slidesPerView={4}
+          slidesPerView={slides}
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
           navigation
