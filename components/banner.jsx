@@ -12,7 +12,7 @@ export default function Banner() {
           height="130"
         />
         <div className="h-[150px] grid-cols-[1fr 292px] content-evenly grid">
-          <h2 className="font-inter text-5xl col-span-2 flex-wrap justify-center flex">
+          <h2 className="font-inter text-4xl 3sm:text-5xl col-span-2 flex-wrap justify-center flex">
             <span className="font-semibold">Знижка 20%</span> до кінця місяця!
           </h2>
           <p className="text-xl italic hidden ml:block">

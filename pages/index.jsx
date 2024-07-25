@@ -29,18 +29,18 @@ export default function Home() {
       <MyHead title="Головна" />
       <Header />
       <Banner />
-      <main className="py-20 xl:p-20 bg-bodily justify-center flex"> {/* 1400px */}
+      <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex"> {/* 1400px */}
         <div className="w-[680px] xl:w-auto 2xl:w-[700px] mx-auto xl:mx-0 text-dark-brown tracking-[-0.02em]">
-          <h1 className="text-6xl font-ubuntu font-medium">
+          <h1 className="text-2xl 4sm:text-3xl 3sm:text-4xl 2sm:text-5xl md:text-6xl font-ubuntu font-medium">
             Сушене м&apos;ясо від Юлі!
           </h1>
-          <p className="mt-3.5 mb-12 font-inter font-normal text-2xl">
+          <p className="mt-3.5 mb-8 3sm:mb-9 2sm:mb-12 font-inter font-normal text-xs 2sm:text-2xl">
             &nbsp;Насолоджуйтесь автентичними смаками з нашого широкого
             асортименту сушеного м&apos;яса. Зараз знижка 20% на всі продукти!
             Замовляйте зараз і відкрийте для себе справжню м&apos;ясну насолоду.
           </p>
           <Link href="/shop">
-            <button className="bg-my-green w-72 h-16 rounded-full text-my-white font-ubuntu font-bold text-3xl tracking-[0.07em]">
+            <button className="bg-my-green w-44 h-10 3sm:w-60 3sm:h-12 md:w-72 md:h-16 rounded-full text-my-white font-ubuntu font-bold text-xl 3sm:text-3xl tracking-[0.07em]">
               Замовити
             </button>
           </Link>
@@ -55,8 +55,8 @@ export default function Home() {
       </main>
 
       {/* Т Р Е Н Д И */}
-      <section className="px-20">
-        <div className="flex mt-16">
+      <section className="2sm:px-20">
+        <div className="flex mt-16 justify-center 2sm:justify-start">
           <Image
             src="icons/black-fire.svg"
             alt="#fire"
@@ -65,7 +65,7 @@ export default function Home() {
             height="80"
           />
           <div className="md:ml-3.5">
-            <h2 className="font-ubuntu font-medium text-5xl md:text-7xl text-my-black tracking-[-0.02em]">
+            <h2 className="font-ubuntu font-medium text-4xl 3sm:text-5xl md:text-7xl text-my-black tracking-[-0.02em]">
               Зараз в тренді
             </h2>
             <p className="font-ubuntu font-medium text-lg text-my-black tracking-[0.08em]">
@@ -146,7 +146,7 @@ export default function Home() {
           </SwiperSlide>
         </Swiper>
         <Link href="/shop" className="w-fit mx-auto my-6 block">
-          <button className="w-80 h-20 hover:bg-my-black border-[7px] rounded-full border-my-black font-ubuntu font-bold text-3xl text-my-black hover:text-my-white tracking-[0.07em]">
+          <button className="w-48 h-14 3sm:w-80 3sm:h-20 hover:bg-my-black border-[4px] 3sm:border-[7px] rounded-full border-my-black font-ubuntu font-bold text-2xl 3sm:text-3xl text-my-black hover:text-my-white tracking-[0.07em]">
             Поласувати
           </button>
         </Link>

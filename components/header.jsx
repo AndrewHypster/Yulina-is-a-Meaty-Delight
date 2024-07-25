@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Header({ path = "" }) {
   return (
-    <header className="px-20 justify-between items-center flex text-dark-red">
+    <header className="px-10 2sm:px-20 justify-between items-center flex text-dark-red">
       <div className="flex items-center">
         <Link href="/">
           <Image
