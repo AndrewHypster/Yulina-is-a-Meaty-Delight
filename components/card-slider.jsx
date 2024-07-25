@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function CardSlider({ img, kind, name, cost }) {
   return (
-    <div className="w-64 mb-[12px] border border-my-black hover:shadow-[12px_12px_#413636]">
+    <div className="w-64 mx-auto mb-[12px] border border-my-black hover:shadow-[12px_12px_#413636]">
       <Image src={img} alt="" className="w-64" width="256" height="256" />
       <div className="mt-[-30px] mx-5 text-center select-none">
         <p className="text-my-gray font-medium text-2xl font-marck-script">

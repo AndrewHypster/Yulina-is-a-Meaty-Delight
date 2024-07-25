@@ -33,3 +33,14 @@
   grid-column: 18/19 !important;
   background-image: url('../public/icons/right.svg');
 }
+
+@media (max-width: 870px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+
+  .swiper {
+    margin-top: 4px;
+  }
+}

@@ -12,14 +12,16 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-
+// React
 import { useEffect, useState } from "react";
 
 export default function Home() {
   const [slides, setSlides] = useState(4);
+  const [slideModules, setSlideModules] = useState([Navigation, Pagination, Scrollbar, A11y]);
   useEffect(() => {
     if (window.innerWidth <= 1250) setSlides(3)
     if (window.innerWidth <= 980) setSlides(2)
+    if (window.innerWidth <= 690) setSlides(1)
   }, []);
 
   return (
@@ -58,12 +60,12 @@ export default function Home() {
           <Image
             src="icons/black-fire.svg"
             alt="#fire"
-            className="h-24 mt-[-25px]"
+            className="h-16 md:h-24 md:mt-[-25px]"
             width="80"
             height="80"
           />
-          <div className="ml-3.5">
-            <h2 className="font-ubuntu font-medium text-7xl text-my-black tracking-[-0.02em]">
+          <div className="md:ml-3.5">
+            <h2 className="font-ubuntu font-medium text-5xl md:text-7xl text-my-black tracking-[-0.02em]">
               Зараз в тренді
             </h2>
             <p className="font-ubuntu font-medium text-lg text-my-black tracking-[0.08em]">
@@ -73,7 +75,7 @@ export default function Home() {
         </div>
 
         <Swiper
-          modules={[Navigation, Pagination, Scrollbar, A11y]}
+          modules={slideModules}
           spaceBetween={0}
           slidesPerView={slides}
           onSlideChange={() => console.log("slide change")}

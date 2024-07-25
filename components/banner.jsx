@@ -7,7 +7,7 @@ export default function Banner() {
         <Image
           src="icons/green-fire.svg"
           alt="green-fire"
-          className="h-[130px]"
+          className="hidden sm:block h-[130px]"
           width="130"
           height="130"
         />
@@ -25,7 +25,7 @@ export default function Banner() {
         <Image
           src="icons/green-fire.svg"
           alt="green-fire"
-          className="h-[130px]"
+          className="hidden sm:block h-[130px]"
           width="130"
           height="130"
         />
