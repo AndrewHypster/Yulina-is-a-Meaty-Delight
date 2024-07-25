@@ -26,7 +26,52 @@ export default function Header({ path = "" }) {
         <Link href="mailto:info@gmail.com">info@gmail.com</Link>
       </address>
 
-      <div style={{backgroundImage: `url(${path}icons/menu.svg)`}} className='w-8 h-8 bg-cover cursor-pointer hover:brightness-[3] ml:hidden' />
+      <a
+        href="#menu"
+        style={{ backgroundImage: `url(${path}icons/menu.svg)` }}
+        className="w-8 h-8 bg-cover cursor-pointer hover:brightness-[3] ml:hidden"
+      />
+
+      <div
+        id="menu"
+        className="w-screen h-screen fixed z-10 top-0 left-full target:left-0 p-8 bg-my-white"
+      >
+        <a
+          href="#"
+          style={{ backgroundImage: `url(${path}icons/x.svg)` }}
+          alt=""
+          className="w-8 h-8 absolute right-[2rem] block"
+        />
+        <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
+          <Link href="">Головна</Link>
+          <hr />
+          <Link href="/shop">Продукція</Link>
+          <hr />
+          <Link href="#">Смаки</Link>
+          <hr />
+          <Link href="#">Про нас</Link>
+          <hr />
+          <Link href="#">Блог</Link>
+          <hr />
+          <Link href="#">Контакти</Link>
+          <hr />
+
+          <div className="mt-8 grid grid-cols-2 w-fit gap-6">
+            <Link href=''>
+              <Image src={path + "icons/instagram.svg"} width='64' height='64' alt="instagram" className="w-10 h-10" />
+            </Link>
+            <Link href=''>
+              <Image src={path + "icons/telegram.svg"} width='64' height='64' alt="telegram" className="w-10 h-10" />
+            </Link>
+            <Link href=''>
+              <Image src={path + "icons/facebook.svg"} width='64' height='64' alt="facebook" className="w-10 h-10" />
+            </Link>
+            <Link href=''>
+              <Image src={path + "icons/linkedin.svg"} width='64' height='64' alt="linkedin" className="w-10 h-10" />
+            </Link>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }

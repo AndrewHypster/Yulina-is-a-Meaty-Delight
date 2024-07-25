@@ -31,7 +31,7 @@ export default function Home() {
       <Banner />
       <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex"> {/* 1400px */}
         <div className="w-[680px] xl:w-auto 2xl:w-[700px] mx-auto xl:mx-0 text-dark-brown tracking-[-0.02em]">
-          <h1 className="text-2xl 4sm:text-3xl 3sm:text-4xl 2sm:text-5xl md:text-6xl font-ubuntu font-medium">
+          <h1 className="text-[1.6rem] 4sm:text-3xl 3sm:text-4xl 2sm:text-5xl md:text-6xl font-ubuntu font-medium">
             Сушене м&apos;ясо від Юлі!
           </h1>
           <p className="mt-3.5 mb-8 3sm:mb-9 2sm:mb-12 font-inter font-normal text-xs 2sm:text-2xl">
