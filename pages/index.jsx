@@ -93,7 +93,7 @@ export default function Home() {
           navigation
         >
           {shop.top.map((topId) => (
-            <SwiperSlide>
+            <SwiperSlide key={topId}>
               <CardSlider
                 id={topId}
                 img={`/imgs/tovar/${topId}.png`}
