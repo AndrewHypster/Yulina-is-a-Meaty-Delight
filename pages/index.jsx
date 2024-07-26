@@ -14,6 +14,7 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 // React
 import { useEffect, useState } from "react";
+import Footer from "@/components/footer";
 
 export default function Home() {
   const [slides, setSlides] = useState(4);
@@ -153,13 +154,16 @@ export default function Home() {
       </section>
 
       {/* В И К О Р И С Т А Н Н Я */}
-      <section>
+      {/* <section>
         <HowToUse
           title="Подорожі та походи"
           text="Сушене м'ясо є ідеальною їжею для подорожей, походів та кемпінгу. Воно легке, не потребує охолодження і забезпечує високий рівень білка та енергії, необхідні під час активного відпочинку"
           bg='imgs/use-1.png'
         />
-      </section>
+      </section> */}
+
+      {/* П І Д В А Л */}
+      <Footer />
     </>
   );
 }
