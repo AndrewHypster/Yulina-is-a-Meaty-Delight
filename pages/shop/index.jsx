@@ -17,7 +17,7 @@ export default function Shop() {
         <div className="flex flex-wrap gap-1 p-10 pl-0 cont-left">
           {shop.all.map((tovar) => (
             <CardSlider
-              key={topId}
+              key={tovar.id}
               id={tovar.id}
               img={`/imgs/tovar/${tovar.id}.png`}
               kind={tovar.kind}
