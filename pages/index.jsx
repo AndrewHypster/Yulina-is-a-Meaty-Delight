@@ -94,14 +94,13 @@ export default function Home() {
         >
           {shop.top.map((topId) => (
             <SwiperSlide>
-              {" "}
               <CardSlider
                 id={topId}
                 img={`/imgs/tovar/${topId}.png`}
                 kind={shop.all[topId].kind}
                 name={shop.all[topId].name}
                 cost={shop.all[topId].cost}
-              />{" "}
+              />
             </SwiperSlide>
           ))}
         </Swiper>
