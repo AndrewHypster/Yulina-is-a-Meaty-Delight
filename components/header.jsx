@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import SocialIcons from "./social-icons";
 
 export default function Header({ path = "" }) {
   return (
@@ -57,18 +58,7 @@ export default function Header({ path = "" }) {
           <hr />
 
           <div className="mt-8 grid grid-cols-2 w-fit gap-6">
-            <Link href=''>
-              <Image src={path + "icons/instagram.svg"} width='64' height='64' alt="instagram" className="w-10 h-10" />
-            </Link>
-            <Link href=''>
-              <Image src={path + "icons/telegram.svg"} width='64' height='64' alt="telegram" className="w-10 h-10" />
-            </Link>
-            <Link href=''>
-              <Image src={path + "icons/facebook.svg"} width='64' height='64' alt="facebook" className="w-10 h-10" />
-            </Link>
-            <Link href=''>
-              <Image src={path + "icons/linkedin.svg"} width='64' height='64' alt="linkedin" className="w-10 h-10" />
-            </Link>
+            <SocialIcons initsize='64' />
           </div>
         </div>
       </div>
