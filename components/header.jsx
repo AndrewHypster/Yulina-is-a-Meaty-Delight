@@ -4,9 +4,9 @@ import SocialIcons from "./social-icons";
 
 export default function Header({ path = "" }) {
   return (
-    <header className="px-10 2sm:px-20 justify-between items-center flex text-dark-red">
+    <header id="header" className="px-10 2sm:px-20 justify-between items-center flex text-dark-red">
       <div className="flex items-center">
-        <Link href="/">
+        <Link href="/" className="no-filter">
           <Image
             src={path + "logo.svg"}
             alt="logo"

@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 
 export default function Shop() {
   const router = useRouter();
-  const { name } = router.query;
+  const { id } = router.query;
 
   return (
     <>
       <Header path="../" />
-      <div>{name}</div>
+      <div>{id}</div>
     </>
   );
 }

@@ -4,6 +4,7 @@
 
 html {
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 * {
@@ -14,4 +15,8 @@ html {
 
 a {
   font-style: normal;
+}
+
+a:not(.no-filter):hover {
+  filter: brightness(1.4);
 }

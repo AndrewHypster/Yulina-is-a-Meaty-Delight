@@ -16,9 +16,9 @@ export default function Banner() {
             <span className="font-semibold">Знижка 20%</span> до кінця місяця!
           </h2>
           <p className="text-xl italic hidden ml:block">
-            Спробуйте найсмачніше сушене м&apos;ясо від Юлі
+            Спробуйте найсмачніше сушене м&apos;ясо від Нас
           </p>
-          <button className="h-11 w-[205px] mx-auto rounded-full border-my-white border-4 bg-light-brown text-2xl font-bold col-span-2 ml:col-span-1 gap-2 ml:gop-0">
+          <button className="h-11 w-[205px] mx-auto rounded-full border-my-white border-4 hover:text-dark-red hover:bg-my-white bg-light-brown text-2xl font-bold col-span-2 ml:col-span-1 gap-2 ml:gop-0">
             Купити зараз
           </button>
         </div>

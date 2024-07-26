@@ -16,13 +16,20 @@ import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 import Footer from "@/components/footer";
 
+import shop from "../shop.json";
+
 export default function Home() {
   const [slides, setSlides] = useState(4);
-  const [slideModules, setSlideModules] = useState([Navigation, Pagination, Scrollbar, A11y]);
+  const [slideModules, setSlideModules] = useState([
+    Navigation,
+    Pagination,
+    Scrollbar,
+    A11y,
+  ]);
   useEffect(() => {
-    if (window.innerWidth <= 1250) setSlides(3)
-    if (window.innerWidth <= 980) setSlides(2)
-    if (window.innerWidth <= 690) setSlides(1)
+    if (window.innerWidth <= 1250) setSlides(3);
+    if (window.innerWidth <= 980) setSlides(2);
+    if (window.innerWidth <= 690) setSlides(1);
   }, []);
 
   return (
@@ -30,17 +37,19 @@ export default function Home() {
       <MyHead title="Головна" />
       <Header />
       <Banner />
-      <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex"> {/* 1400px */}
+      <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex">
+        {" "}
+        {/* 1400px */}
         <div className="w-[680px] xl:w-auto 2xl:w-[700px] mx-auto xl:mx-0 text-dark-brown tracking-[-0.02em]">
           <h1 className="text-[1.6rem] 4sm:text-3xl 3sm:text-4xl 2sm:text-5xl md:text-6xl font-ubuntu font-medium">
-            Сушене м&apos;ясо від Юлі!
+            Сушене м&apos;ясо від Нас!
           </h1>
           <p className="mt-3.5 mb-8 3sm:mb-9 2sm:mb-12 font-inter font-normal text-xs 2sm:text-2xl">
             &nbsp;Насолоджуйтесь автентичними смаками з нашого широкого
             асортименту сушеного м&apos;яса. Зараз знижка 20% на всі продукти!
             Замовляйте зараз і відкрийте для себе справжню м&apos;ясну насолоду.
           </p>
-          <Link href="/shop">
+          <Link href="/shop" className="no-filter hover:brightness-125">
             <button className="bg-my-green w-44 h-10 3sm:w-60 3sm:h-12 md:w-72 md:h-16 rounded-full text-my-white font-ubuntu font-bold text-xl 3sm:text-3xl tracking-[0.07em]">
               Замовити
             </button>
@@ -83,68 +92,18 @@ export default function Home() {
           onSwiper={(swiper) => console.log(swiper)}
           navigation
         >
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
-
-          <SwiperSlide>
-            <CardSlider
-              img="/imgs/tovar.png"
-              kind="Міні сосиски"
-              name="ГАРЯЧІ ЯЛОВИЧІ ПАЛИЧКИ"
-              cost="280"
-            />
-          </SwiperSlide>
+          {shop.top.map((topId) => (
+            <SwiperSlide>
+              {" "}
+              <CardSlider
+                id={topId}
+                img={`/imgs/tovar/${topId}.png`}
+                kind={shop.all[topId].kind}
+                name={shop.all[topId].name}
+                cost={shop.all[topId].cost}
+              />{" "}
+            </SwiperSlide>
+          ))}
         </Swiper>
         <Link href="/shop" className="w-fit mx-auto my-6 block">
           <button className="w-48 h-14 3sm:w-80 3sm:h-20 hover:bg-my-black border-[4px] 3sm:border-[7px] rounded-full border-my-black font-ubuntu font-bold text-2xl 3sm:text-3xl text-my-black hover:text-my-white tracking-[0.07em]">
@@ -171,7 +130,10 @@ export default function Home() {
 function HowToUse({ title, text, bg, img }) {
   return (
     <div className="relative">
-      <div style={{background: `url(${bg})`}} className='h-96 !bg-center !bg-cover'>
+      <div
+        style={{ background: `url(${bg})` }}
+        className="h-96 !bg-center !bg-cover"
+      >
         <h3>{title}</h3>
         <p>{text}</p>
         {img ? <Image src={img} /> : <></>}
