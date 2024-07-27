@@ -1,11 +1,12 @@
 import Image from "next/image";
+import Link from "next/link";
 
-export default function Banner() {
+export default function Banner({ path='' }) {
   return (
     <aside className="h-[160px] bg-gradient-to-r from-dark-red to-[#A53C3C] items-center flex">
       <div className="w-fit mx-auto text-my-white items-center flex">
         <Image
-          src="icons/green-fire.svg"
+          src={path + "icons/green-fire.svg"}
           alt="green-fire"
           className="hidden sm:block h-[130px]"
           width="130"
@@ -16,14 +17,16 @@ export default function Banner() {
             <span className="font-semibold">Знижка 20%</span> до кінця місяця!
           </h2>
           <p className="text-xl italic hidden ml:block">
-            Спробуйте найсмачніше сушене м&apos;ясо від Нас
+            Спробуйте найсмачніше сушене м&apos;ясо від Юлі
           </p>
-          <button className="h-11 w-[205px] mx-auto rounded-full border-my-white border-4 hover:text-dark-red hover:bg-my-white bg-light-brown text-2xl font-bold col-span-2 ml:col-span-1 gap-2 ml:gop-0">
-            Купити зараз
-          </button>
+          <Link href='/shop' className="mx-auto col-span-2 ml:col-span-1 gap-2 ml:gap-0">
+            <button className="h-11 w-[205px] rounded-full border-my-white border-4 hover:text-dark-red hover:bg-my-white bg-light-brown text-2xl font-bold">
+              Купити зараз
+            </button>
+          </Link>
         </div>
         <Image
-          src="icons/green-fire.svg"
+          src={path + "icons/green-fire.svg"}
           alt="green-fire"
           className="hidden sm:block h-[130px]"
           width="130"

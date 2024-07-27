@@ -6,18 +6,18 @@ export default function Footer({ path = "" }) {
     <footer className="h-[460px] px-10 pt-8 4sm:px-14 2sm:pt-12 2sm:px-20 shadow-[inset_0_6px_5px_rgba(0,0,0,0.25)] grid">
       <div className="flex justify-between">
         <div className="w-fit text-center">
-          <a href="#header">
+          <a href="#header" className="no-filter">
             <Image
               src={path + "logo.svg"}
               width="84"
               height="84"
               alt="logo"
-              className="!h-16 2sm:!h-auto mx-auto no-filter"
+              className="!h-16 2sm:!h-auto mx-auto"
             />
           </a>
 
           <p className="font-ubuntu text-base 2sm:text-xl font-medium text-dark-red tracking-tight leading-5 capitalize">
-            Наша м&apos;ясна
+            Юлина м&apos;ясна
             <br />
             насолода
           </p>
@@ -42,7 +42,7 @@ export default function Footer({ path = "" }) {
       <div className="self-end">
         <hr className="absolute 2sm:static left-0 w-full h-px border-0 bg-my-black" />
         <p className="my-1 3sm:my-4 font-ubuntu font-light text-[6px] 4sm:text-[9px] 3sm:text-xs 2sm:text-sm text-center sm:text-left">
-          Авторське право © 2024 Наша м’ясна насолода
+          Авторське право © 2024 Юлина м’ясна насолода
         </p>
       </div>
     </footer>

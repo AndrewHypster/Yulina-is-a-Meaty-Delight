@@ -1,3 +1,4 @@
+import Banner from "@/components/banner";
 import CardSlider from "@/components/card-slider";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -10,11 +11,14 @@ export default function Shop() {
     <>
       <MyHead title="Магазин" />
       <Header path="../" />
+      <Banner />
       <div className="flex">
-        <div className="w-36 ml-4 mt-[calc(100vh-60vh)] h-fit gap-6 grid">
-          <SocialIcons initsize='36' />
+        <div className="w-36 justify-center place-items-center hidden md:grid">
+          <div className="grid h-fit gap-10">
+            <SocialIcons initsize="36" />
+          </div>
         </div>
-        <div className="flex flex-wrap gap-1 p-10 pl-0 cont-left">
+        <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center md:justify-start">
           {shop.all.map((tovar) => (
             <CardSlider
               key={tovar.id}

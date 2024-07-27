@@ -16,7 +16,7 @@ export default function Header({ path = "" }) {
           />
         </Link>
         <nav className="h-fit font-long-cang text-2xl gap-x-3 hidden ml:flex">
-          <Link href="/">Головна</Link>|<Link href="shop">Продукція</Link>|
+          <Link href="/">Головна</Link>|<Link href="/shop">Продукція</Link>|
           <Link href="#">Смаки</Link>|<Link href="#">Про нас</Link>|
           <Link href="#">Блог</Link>|<Link href="#">Контакти</Link>
         </nav>
@@ -58,7 +58,7 @@ export default function Header({ path = "" }) {
           <hr />
 
           <div className="mt-8 grid grid-cols-2 w-fit gap-6">
-            <SocialIcons initsize='64' />
+            <SocialIcons path={path} initsize='64' />
           </div>
         </div>
       </div>
