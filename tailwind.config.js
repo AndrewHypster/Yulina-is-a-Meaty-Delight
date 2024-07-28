@@ -24,6 +24,7 @@ module.exports = {
         "long-cang": ["Long Cang", "cursive"],
         "marck-script": ["Marck Script", "cursive"],
         "pt-sans-narrow": ["PT Sans Narrow", "sans-serif"],
+        "roboto-condensed": ["Roboto Condensed", "sans-serif"],
       },
     },
     screens: {
@@ -38,5 +39,21 @@ module.exports = {
       '2xl': '1401px',
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase }) { // Забирає стрілки в інпут нумбер
+      addBase({
+        'input[type="number"]::-webkit-outer-spin-button': {
+          '-webkit-appearance': 'none',
+          'margin': 0,
+        },
+        'input[type="number"]::-webkit-inner-spin-button': {
+          '-webkit-appearance': 'none',
+          'margin': 0,
+        },
+        'input[type="number"]': {
+          '-moz-appearance': 'textfield',
+        },
+      });
+    },
+  ],
 };

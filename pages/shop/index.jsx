@@ -14,8 +14,8 @@ export default function Shop() {
       <Banner />
       <div className="flex">
         <div className="w-36 justify-center place-items-center hidden md:grid">
-          <div className="grid h-fit gap-10">
-            <SocialIcons initsize="36" />
+          <div className="grid h-fit gap-10 grid-flow-row-dense">
+            <SocialIcons initsize="36" styles="rotate-[270deg]" />
           </div>
         </div>
         <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center md:justify-start">

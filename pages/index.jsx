@@ -91,6 +91,7 @@ export default function Home() {
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
           navigation
+          className='select-none cursor-grab'
         >
           {shop.top.map((topId) => (
             <SwiperSlide key={topId}>
