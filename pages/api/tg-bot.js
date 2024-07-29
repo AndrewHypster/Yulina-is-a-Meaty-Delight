@@ -21,6 +21,6 @@ bot.on('message', (msg) => {
   // Якщо повідомлення містить текст
   if (msg.text) {
     // Відправка повідомлення з отриманим текстом
-    bot.sendMessage(chatId, `Ви написали: ${msg}`);
+    bot.sendMessage(chatId, `чат айді: ${msg.chat}`);
   }
 });
