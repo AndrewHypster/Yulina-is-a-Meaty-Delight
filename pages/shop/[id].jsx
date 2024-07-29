@@ -26,19 +26,19 @@ export default function Tovar() {
 
   const sendTgBot = () => {
     const text = `
-    Нове замовлення!\n
+    Нове замовлення!
     \n
-    Тип: ${shop.all[id].kind}\n
-    Назва: ${shop.all[id].name}\n
-    Ціна: ₴${(+shop.all[id].cost * (weight.count / 100) * weight.type).toFixed(2)}\n
-    Кількість: ${weight.count} ${weight.type === 1? 'гр':'кг'}\n
+    Тип: ${shop.all[id].kind}
+    Назва: ${shop.all[id].name}
+    Ціна: ₴${(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(2)}
+    Кількість: ${weight.count} ${weight.type === 1? 'гр':'кг'}
     \n
-    Контакти\n
+    Контакти
     Ім'я: ${user.name}
     тел: ${user.contact}
     `
 
-    axios.post('/api/tg-bot', { chatid: 622243013, text: text })
+    axios.post('/api/tg-bot', { text: text })
     .then(response => {
       console.log(response.data);
     })
@@ -162,7 +162,7 @@ export default function Tovar() {
                 кунжутним соєвим соусом.
               </b>
               <span name='cost' className="block font-ubuntu font-medium text-my-black text-3xl">
-                ₴{(+shop.all[id].cost * (weight.count / 100) * weight.type).toFixed(2)}
+                ₴{(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(2)}
               </span>
               <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
                 ВКАЖІТЬ РОЗМІР
