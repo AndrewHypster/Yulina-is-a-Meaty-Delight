@@ -1,8 +1,4 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
-export default function handler(req, res) {
-  res.status(200).json({ req: req.body });
-}
+// Тг бот: https://t.me/Yulina_Is_A_Meaty_Delight_bot
 
 const TelegramBot = require('node-telegram-bot-api');
 
@@ -25,6 +21,6 @@ bot.on('message', (msg) => {
   // Якщо повідомлення містить текст
   if (msg.text) {
     // Відправка повідомлення з отриманим текстом
-    bot.sendMessage(chatId, `Ви написали: ${msg.text}`);
+    bot.sendMessage(chatId, `Ви написали: ${msg}`);
   }
 });
