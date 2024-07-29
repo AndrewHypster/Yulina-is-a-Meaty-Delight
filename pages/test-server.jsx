@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export default function TestServer () {
-  axios.post('/api/hello', { key: 'value' })
+  axios.post('/api/tg-bot', { chatid: 622243013, text: '**Нове** замовлення' })
     .then(response => {
       console.log(response.data);
     })
