@@ -10,11 +10,11 @@ export default function handler(req, res) {
     const message = req.body;
 
     const chatId = message.chatid;
-    const responseMessage = `Ви написали: ${message.text}`;
+    const responseMessage = message.text;
     bot.sendMessage(chatId, responseMessage);
 
     res.status(200).send('OK');
   } else {
-    res.status(405).send('Method Not Allowed');
+    res.status(405).send('Method Not Allowed тре метод POST');
   }
 }

@@ -14,12 +14,38 @@ import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import { useState } from "react";
 
+import axios from 'axios';
+
 export default function Tovar() {
   const router = useRouter();
   const { id } = router.query;
   const hasTovar = shop.all.some((tovar) => tovar.id === +id);
 
   const [weight, setWeight] = useState({ count: 100, type: 1 });
+  const [user, setUser] = useState({ name: null, contact: null });
+
+  const sendTgBot = () => {
+    const text = `
+    Нове замовлення!\n
+    \n
+    Тип: ${shop.all[id].kind}\n
+    Назва: ${shop.all[id].name}\n
+    Ціна: ₴${(+shop.all[id].cost * (weight.count / 100) * weight.type).toFixed(2)}\n
+    Кількість: ${weight.count} ${weight.type === 1? 'гр':'кг'}\n
+    \n
+    Контакти\n
+    Ім'я: ${user.name}
+    тел: ${user.contact}
+    `
+
+    axios.post('/api/tg-bot', { chatid: 622243013, text: text })
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      console.error('There was an error!', error);
+    });
+  }
 
   return (
     <>
@@ -135,7 +161,7 @@ export default function Tovar() {
                 Густий і жувальний з часниково-імбирною сумішшю та пуншем із
                 кунжутним соєвим соусом.
               </b>
-              <span className="block font-ubuntu font-medium text-my-black text-3xl">
+              <span name='cost' className="block font-ubuntu font-medium text-my-black text-3xl">
                 ₴{(+shop.all[id].cost * (weight.count / 100) * weight.type).toFixed(2)}
               </span>
               <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
@@ -144,6 +170,7 @@ export default function Tovar() {
               <div className="flex w-fit p-2 rounded-full border-4 border-my-black items-center flex-wrap">
                 <input
                   type="number"
+                  name="count"
                   placeholder="100"
                   className="max-w-44 focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-3xl"
                   onChange={({ target }) =>
@@ -168,7 +195,10 @@ export default function Tovar() {
                   <option value="кг">КГ</option>
                 </select>
               </div>
-              <button className="w-[25rem] h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em]">
+              <input id="userName" type="text" placeholder="Ім'я" onChange={({target}) => setUser({name: target.value, contact: user.contact})} />
+              <input id="userCont" type="text" placeholder="Контакти" onChange={({target}) => setUser({name: user.name, contact: target.value})} />
+
+              <button type="button" className="w-[25rem] h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em]" onClick={sendTgBot}>
                 КУПИТИ
               </button>
             </form>
