@@ -17,8 +17,10 @@ import { useEffect, useState } from "react";
 import Footer from "@/components/footer";
 
 import shop from "../shop.json";
+import LoadingPage from "./loading";
 
 export default function Home() {
+  const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
   const [slideModules, setSlideModules] = useState([
     Navigation,
@@ -27,11 +29,17 @@ export default function Home() {
     A11y,
   ]);
   useEffect(() => {
+    setLoading(false);
     if (window.innerWidth <= 1250) setSlides(3);
     if (window.innerWidth <= 980) setSlides(2);
     if (window.innerWidth <= 690) setSlides(1);
   }, []);
 
+  if (loading)
+  return(
+    <LoadingPage />
+  )
+  else
   return (
     <>
       <MyHead title="Головна" />

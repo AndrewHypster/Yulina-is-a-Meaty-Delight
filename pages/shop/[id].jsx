@@ -15,6 +15,7 @@ import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import LoadingPage from "../loading";
 
 export default function Tovar() {
   const router = useRouter();
@@ -24,8 +25,10 @@ export default function Tovar() {
   const [weight, setWeight] = useState({ count: 100, type: 1 });
   const [user, setUser] = useState({ name: null, contact: null });
 
+  const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
   useEffect(() => {
+    setLoading(false);
     if (window.innerWidth <= 690) setSlides(3);
     if (window.innerWidth <= 332) setSlides(2);
   }, []);
@@ -56,191 +59,196 @@ export default function Tovar() {
       });
   };
 
-  return (
-    <>
-      {!hasTovar ? (
-        <Error statusCode={404} />
-      ) : (
-        <>
-          <MyHead path="../" title={shop.all[id].name} />
-          <Header path="../" />
-          <Banner path="../" />
-          <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
-            <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
-              <Image
-                src={`/imgs/tovar/${id}.png`}
-                width="700"
-                height="700"
-                alt={shop.all[id].name}
-                className="w-96 lg:w-full mx-auto"
-              />
-              <Swiper
-                modules={[Navigation, Pagination, Scrollbar, A11y]}
-                spaceBetween={0}
-                slidesPerView={slides}
-                onSlideChange={() => console.log("slide change")}
-                onSwiper={(swiper) => console.log(swiper)}
-                className="3sm:w-96 lg:w-full select-none cursor-grab"
-              >
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-                <SwiperSlide>
-                  <Image
-                    src={`/imgs/tovar/${id}.png`}
-                    width="700"
-                    height="700"
-                    alt={shop.all[id].name}
-                  />
-                </SwiperSlide>
-              </Swiper>
-            </div>
-            <form className="max-w-lg mx-4 md:m-0 self-center">
-              <h2 className="w-fit font-marck-script text-my-black text-4xl ml:text-5xl xl0:text-6xl font-normal">
-                {shop.all[id].kind}
-              </h2>
-              <h1 className="w-fit font-ubuntu text-my-black text-4xl ml:text-5xl xl0:text-6xl font-bold uppercase">
-                {shop.all[id].name}
-              </h1>
-              <div className="w-fit grid grid-cols-2 gap-4 content-center">
-                <div className="star-container">
-                  <style jsx>{`
-                    .star-container::before {
-                      content: "★★★★★";
-                      font-size: 40px;
-                      background: linear-gradient(
-                        to right,
-                        #ed8a19 ${88}%,
-                        #f7e8c2 0%
-                      );
-                      -webkit-background-clip: text;
-                      color: transparent;
-                    }
-                  `}</style>
-                </div>
-                <p className="font-light text-lg font-ubuntu text-my-black self-center">
-                  {234} відгуки
-                </p>
-              </div>
-              <b className="font-inter text-lg font-medium text-my-black tracking-wider block">
-                Густий і жувальний з часниково-імбирною сумішшю та пуншем із
-                кунжутним соєвим соусом.
-              </b>
-              <span
-                name="cost"
-                className="block font-ubuntu font-medium text-my-black text-3xl"
-              >
-                ₴
-                {(
-                  +shop.all[id].cost *
-                  (weight.count / 1000) *
-                  weight.type
-                ).toFixed(2)}
-              </span>
-              <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
-                ВКАЖІТЬ РОЗМІР
-              </b>
-              <div className="flex w-fit p-2 rounded-full border-4 border-my-black items-center flex-wrap">
-                <input
-                  type="number"
-                  name="count"
-                  placeholder="100"
-                  className="max-w-44 focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-3xl"
-                  onChange={({ target }) =>
-                    setWeight({
-                      count: target.value ? target.value : 100,
-                      type: weight.type,
-                    })
-                  }
+  if (loading) return <LoadingPage />;
+  else
+    return (
+      <>
+        {!hasTovar ? (
+          <Error statusCode={404} />
+        ) : (
+          <>
+            <MyHead path="../" title={shop.all[id].name} />
+            <Header path="../" />
+            <Banner path="../" />
+            <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
+              <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
+                <Image
+                  src={`/imgs/tovar/${id}.png`}
+                  width="700"
+                  height="700"
+                  alt={shop.all[id].name}
+                  className="w-96 lg:w-full mx-auto"
                 />
-                <hr className="rotate-90 w-7 mx-[-10px] border-my-black border-[1px] rounded-full" />
-                <select
-                  name="weight"
-                  className="font-inter text-xl font-light"
-                  onChange={({ target }) =>
-                    setWeight({
-                      count: weight.count,
-                      type: target.value === "гр" ? 1 : 1000,
-                    })
-                  }
+                <Swiper
+                  modules={[Navigation, Pagination, Scrollbar, A11y]}
+                  spaceBetween={0}
+                  slidesPerView={slides}
+                  onSlideChange={() => console.log("slide change")}
+                  onSwiper={(swiper) => console.log(swiper)}
+                  className="3sm:w-96 lg:w-full select-none cursor-grab"
                 >
-                  <option value="гр">ГР</option>
-                  <option value="кг">КГ</option>
-                </select>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                  <SwiperSlide>
+                    <Image
+                      src={`/imgs/tovar/${id}.png`}
+                      width="700"
+                      height="700"
+                      alt={shop.all[id].name}
+                    />
+                  </SwiperSlide>
+                </Swiper>
               </div>
-              <input
-                id="userName"
-                type="text"
-                placeholder="Ім'я"
-                onChange={({ target }) =>
-                  setUser({ name: target.value, contact: user.contact })
-                }
-              />
-              <input
-                id="userCont"
-                type="text"
-                placeholder="Контакти"
-                onChange={({ target }) =>
-                  setUser({ name: user.name, contact: target.value })
-                }
-              />
-
-              <button
-                type="button"
-                className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
-                onClick={sendTgBot}
-              >
-                КУПИТИ
-              </button>
-            </form>
-          </section>
-        </>
-      )}
-    </>
-  );
+              <form className="max-w-lg mx-4 md:m-0 self-center">
+                <h2 className="w-fit font-marck-script text-my-black text-4xl ml:text-5xl xl0:text-6xl font-normal">
+                  {shop.all[id].kind}
+                </h2>
+                <h1 className="w-fit font-ubuntu text-my-black text-4xl ml:text-5xl xl0:text-6xl font-bold uppercase">
+                  {shop.all[id].name}
+                </h1>
+                <div className="w-fit grid grid-cols-2 gap-4 content-center">
+                  <div className="star-container">
+                    <style jsx>{`
+                      .star-container::before {
+                        content: "★★★★★";
+                        font-size: 40px;
+                        background: linear-gradient(
+                          to right,
+                          #ed8a19 ${88}%,
+                          #f7e8c2 0%
+                        );
+                        -webkit-background-clip: text;
+                        color: transparent;
+                      }
+                    `}</style>
+                  </div>
+                  <p className="font-light text-lg font-ubuntu text-my-black self-center">
+                    {234} відгуки
+                  </p>
+                </div>
+                <b className="font-inter text-lg font-medium text-my-black tracking-wider block">
+                  Густий і жувальний з часниково-імбирною сумішшю та пуншем із
+                  кунжутним соєвим соусом.
+                </b>
+                <span
+                  name="cost"
+                  className="block font-ubuntu font-medium text-my-black text-3xl"
+                >
+                  ₴
+                  {(
+                    +shop.all[id].cost *
+                    (weight.count / 1000) *
+                    weight.type
+                  ).toFixed(2)}
+                </span>
+                <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
+                  ВКАЖІТЬ РОЗМІР
+                </b>
+                <div className="flex w-fit p-2 rounded-full border-4 border-my-black items-center flex-wrap">
+                  <input
+                    type="number"
+                    name="count"
+                    placeholder="100"
+                    className="max-w-44 focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-3xl"
+                    onChange={({ target }) =>
+                      setWeight({
+                        count: target.value ? target.value : 100,
+                        type: weight.type,
+                      })
+                    }
+                  />
+                  <hr className="rotate-90 w-7 mx-[-10px] border-my-black border-[1px] rounded-full" />
+                  <select
+                    name="weight"
+                    className="font-inter text-xl font-light"
+                    onChange={({ target }) =>
+                      setWeight({
+                        count: weight.count,
+                        type: target.value === "гр" ? 1 : 1000,
+                      })
+                    }
+                  >
+                    <option value="гр">ГР</option>
+                    <option value="кг">КГ</option>
+                  </select>
+                </div>
+                <div className="grid 4sm:flex 4sm:gap-4">
+                  <input
+                    id="userName"
+                    type="text"
+                    placeholder="Ім'я"
+                    onChange={({ target }) =>
+                      setUser({ name: target.value, contact: user.contact })
+                    }
+                    className="max-w-40 mt-4 rounded-full border-[2px] border-my-black focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-2xl"
+                  />
+                  <input
+                    id="userCont"
+                    type="text"
+                    placeholder="Контакти"
+                    onChange={({ target }) =>
+                      setUser({ name: user.name, contact: target.value })
+                    }
+                    className="max-w-40 mt-4 rounded-full border-[2px] border-my-black focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-2xl"
+                  />
+                </div>
+                <button
+                  type="button"
+                  className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
+                  onClick={sendTgBot}
+                >
+                  КУПИТИ
+                </button>
+              </form>
+            </section>
+          </>
+        )}
+      </>
+    );
 }

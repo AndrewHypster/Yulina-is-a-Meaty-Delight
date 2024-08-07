@@ -4,9 +4,21 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
 import SocialIcons from "@/components/social-icons";
+import { useEffect, useState } from "react";
 import shop from "../../shop.json";
+import LoadingPage from "../loading";
 
 export default function Shop() {
+  const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  if (loading)
+  return(
+    <LoadingPage />
+  )
+  else
   return (
     <>
       <MyHead title="Магазин" />
