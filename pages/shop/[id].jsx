@@ -49,15 +49,18 @@ export default function Tovar() {
     тел: ${user.contact}
     `;
 
-    for (let i=0; i<3; i++) { // цикл для версаль
-      axios
-      .post("/api/tg-bot", { text: text })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
+    for (let i = 0; i < 3; i++) {
+      // цикл для версаль
+      setTimeout(function () {
+        axios
+          .post("/api/tg-bot", { text: text })
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            console.error("There was an error!", error);
+          });
+      }, 1000);
     }
   };
 
