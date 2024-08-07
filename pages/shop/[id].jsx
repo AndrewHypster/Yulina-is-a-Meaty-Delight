@@ -49,7 +49,8 @@ export default function Tovar() {
     тел: ${user.contact}
     `;
 
-    axios
+    for (let i=0; i<3; i++) { // цикл для версаль
+      axios
       .post("/api/tg-bot", { text: text })
       .then((response) => {
         console.log(response.data);
@@ -57,6 +58,7 @@ export default function Tovar() {
       .catch((error) => {
         console.error("There was an error!", error);
       });
+    }
   };
 
   if (loading) return <LoadingPage />;
