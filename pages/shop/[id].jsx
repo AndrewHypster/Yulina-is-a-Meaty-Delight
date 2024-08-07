@@ -12,9 +12,9 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import axios from 'axios';
+import axios from "axios";
 
 export default function Tovar() {
   const router = useRouter();
@@ -24,28 +24,36 @@ export default function Tovar() {
   const [weight, setWeight] = useState({ count: 100, type: 1 });
   const [user, setUser] = useState({ name: null, contact: null });
 
+  const [slides, setSlides] = useState(4);
+  useEffect(() => {
+    if (window.innerWidth <= 690) setSlides(3);
+  }, []);
+
   const sendTgBot = () => {
     const text = `
     Нове замовлення!
     \n
     Тип: ${shop.all[id].kind}
     Назва: ${shop.all[id].name}
-    Ціна: ₴${(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(2)}
-    Кількість: ${weight.count} ${weight.type === 1? 'гр':'кг'}
+    Ціна: ₴${(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(
+      2
+    )}
+    Кількість: ${weight.count} ${weight.type === 1 ? "гр" : "кг"}
     \n
     Контакти
     Ім'я: ${user.name}
     тел: ${user.contact}
-    `
+    `;
 
-    axios.post('/api/tg-bot', { text: text })
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(error => {
-      console.error('There was an error!', error);
-    });
-  }
+    axios
+      .post("/api/tg-bot", { text: text })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+      });
+  };
 
   return (
     <>
@@ -56,21 +64,22 @@ export default function Tovar() {
           <MyHead path="../" title={shop.all[id].name} />
           <Header path="../" />
           <Banner path="../" />
-          <section className="px-16 py-4 grid grid-cols-2 gap-20 bg-gradient-to-r from-mustard to-50% from-50% my-white">
-            <div>
+          <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
+            <div className="w-full mg:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
               <Image
                 src={`/imgs/tovar/${id}.png`}
                 width="700"
                 height="700"
                 alt={shop.all[id].name}
+                className="w-96 lg:w-full mx-auto"
               />
               <Swiper
                 modules={[Navigation, Pagination, Scrollbar, A11y]}
                 spaceBetween={0}
-                slidesPerView={4}
+                slidesPerView={slides}
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
-                className="select-none cursor-grab"
+                className="w-96 lg:w-full select-none cursor-grab"
               >
                 <SwiperSlide>
                   <Image
@@ -130,11 +139,11 @@ export default function Tovar() {
                 </SwiperSlide>
               </Swiper>
             </div>
-            <form className="w-[32rem] self-center">
-              <h2 className="font-marck-script text-my-black text-6xl font-normal">
+            <form className="max-w-lg mx-4 md:m-0 self-center">
+              <h2 className="w-fit font-marck-script text-my-black text-4xl ml:text-5xl xl0:text-6xl font-normal">
                 {shop.all[id].kind}
               </h2>
-              <h1 className="font-ubuntu text-my-black text-6xl font-bold uppercase">
+              <h1 className="w-fit font-ubuntu text-my-black text-4xl ml:text-5xl xl0:text-6xl font-bold uppercase">
                 {shop.all[id].name}
               </h1>
               <div className="w-fit grid grid-cols-2 gap-4 content-center">
@@ -157,12 +166,20 @@ export default function Tovar() {
                   {234} відгуки
                 </p>
               </div>
-              <b className="font-inter text-lg font-medium text-my-black tracking-wider">
+              <b className="font-inter text-lg font-medium text-my-black tracking-wider block">
                 Густий і жувальний з часниково-імбирною сумішшю та пуншем із
                 кунжутним соєвим соусом.
               </b>
-              <span name='cost' className="block font-ubuntu font-medium text-my-black text-3xl">
-                ₴{(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(2)}
+              <span
+                name="cost"
+                className="block font-ubuntu font-medium text-my-black text-3xl"
+              >
+                ₴
+                {(
+                  +shop.all[id].cost *
+                  (weight.count / 1000) *
+                  weight.type
+                ).toFixed(2)}
               </span>
               <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
                 ВКАЖІТЬ РОЗМІР
@@ -195,10 +212,28 @@ export default function Tovar() {
                   <option value="кг">КГ</option>
                 </select>
               </div>
-              <input id="userName" type="text" placeholder="Ім'я" onChange={({target}) => setUser({name: target.value, contact: user.contact})} />
-              <input id="userCont" type="text" placeholder="Контакти" onChange={({target}) => setUser({name: user.name, contact: target.value})} />
+              <input
+                id="userName"
+                type="text"
+                placeholder="Ім'я"
+                onChange={({ target }) =>
+                  setUser({ name: target.value, contact: user.contact })
+                }
+              />
+              <input
+                id="userCont"
+                type="text"
+                placeholder="Контакти"
+                onChange={({ target }) =>
+                  setUser({ name: user.name, contact: target.value })
+                }
+              />
 
-              <button type="button" className="w-[25rem] h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em]" onClick={sendTgBot}>
+              <button
+                type="button"
+                className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
+                onClick={sendTgBot}
+              >
                 КУПИТИ
               </button>
             </form>

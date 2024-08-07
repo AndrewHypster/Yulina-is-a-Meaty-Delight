@@ -91,17 +91,19 @@ export default function Home() {
           onSlideChange={() => console.log("slide change")}
           onSwiper={(swiper) => console.log(swiper)}
           navigation
-          className='select-none cursor-grab'
+          className="select-none cursor-grab"
         >
           {shop.top.map((topId) => (
             <SwiperSlide key={topId}>
-              <CardSlider
-                id={topId}
-                img={`/imgs/tovar/${topId}.png`}
-                kind={shop.all[topId].kind}
-                name={shop.all[topId].name}
-                cost={shop.all[topId].cost}
-              />
+              <div className="w-fit mx-auto">
+                <CardSlider
+                  id={topId}
+                  img={`/imgs/tovar/${topId}.png`}
+                  kind={shop.all[topId].kind}
+                  name={shop.all[topId].name}
+                  cost={shop.all[topId].cost}
+                />
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>
