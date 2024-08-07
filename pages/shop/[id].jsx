@@ -27,6 +27,7 @@ export default function Tovar() {
   const [slides, setSlides] = useState(4);
   useEffect(() => {
     if (window.innerWidth <= 690) setSlides(3);
+    if (window.innerWidth <= 332) setSlides(2);
   }, []);
 
   const sendTgBot = () => {
@@ -65,7 +66,7 @@ export default function Tovar() {
           <Header path="../" />
           <Banner path="../" />
           <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
-            <div className="w-full mg:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
+            <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
               <Image
                 src={`/imgs/tovar/${id}.png`}
                 width="700"
@@ -79,7 +80,7 @@ export default function Tovar() {
                 slidesPerView={slides}
                 onSlideChange={() => console.log("slide change")}
                 onSwiper={(swiper) => console.log(swiper)}
-                className="w-96 lg:w-full select-none cursor-grab"
+                className="3sm:w-96 lg:w-full select-none cursor-grab"
               >
                 <SwiperSlide>
                   <Image
