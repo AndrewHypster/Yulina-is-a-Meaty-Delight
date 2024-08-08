@@ -16,6 +16,7 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import LoadingPage from "../loading";
+import ModalWindow from "@/components/modal-window";
 
 export default function Tovar() {
   const router = useRouter();
@@ -33,34 +34,57 @@ export default function Tovar() {
     if (window.innerWidth <= 332) setSlides(2);
   }, []);
 
+  const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
   const sendTgBot = () => {
-    const text = `
-    Нове замовлення!
-    \n
-    Тип: ${shop.all[id].kind}
-    Назва: ${shop.all[id].name}
-    Ціна: ₴${(+shop.all[id].cost * (weight.count / 1000) * weight.type).toFixed(
-      2
-    )}
-    Кількість: ${weight.count} ${weight.type === 1 ? "гр" : "кг"}
-    \n
-    Контакти
-    Ім'я: ${user.name}
-    тел: ${user.contact}
-    `;
+    const modalWindow = document.querySelector(".modal-window");
+    if (user.name && user.contact) {
+      const text = `
+      Нове замовлення!
+      \n
+      Тип: ${shop.all[id].kind}
+      Назва: ${shop.all[id].name}
+      Ціна: ₴${(
+        +shop.all[id].cost *
+        (weight.count / 1000) *
+        weight.type
+      ).toFixed(2)}
+      Кількість: ${weight.count} ${weight.type === 1 ? "гр" : "кг"}
+      \n
+      Контакти
+      Ім'я: ${user.name}
+      тел: ${user.contact}
+      `;
 
-    for (let i = 0; i < 3; i++) {
-      // цикл для версаль
-      setTimeout(function () {
-        axios
-          .post("/api/tg-bot", { text: text })
-          .then((response) => {
-            console.log(response.data);
-          })
-          .catch((error) => {
-            console.error("There was an error!", error);
+      axios
+        .post("/api/tg-bot", { text: text })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("There was an error!", error);
+          document.body.style = "overflow: hidden";
+          setModal({
+            type: "Error",
+            text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
+            scroll: window.scrollY,
           });
-      }, 1000);
+          modalWindow.style = `display: grid; top: ${window.scrollY}`;
+        });
+      document.body.style = "overflow: hidden";
+      setModal({
+        type: "Success",
+        text: "Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося",
+        scroll: window.scrollY,
+      });
+      modalWindow.style = `display: grid; top: ${window.scrollY}`;
+    } else {
+      document.body.style = "overflow: hidden";
+      setModal({
+        type: "Warning",
+        text: "Заповніть усі поля!",
+        scroll: window.scrollY,
+      });
+      modalWindow.style = `display: grid; top: ${window.scrollY}`;
     }
   };
 
@@ -75,6 +99,11 @@ export default function Tovar() {
             <MyHead path="../" title={shop.all[id].name} />
             <Header path="../" />
             <Banner path="../" />
+            <ModalWindow
+              type={modal.type}
+              text={modal.text}
+              scroll={modal.scroll}
+            />
             <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
               <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
                 <Image
@@ -198,6 +227,7 @@ export default function Tovar() {
                 <div className="flex w-fit p-2 rounded-full border-4 border-my-black items-center flex-wrap">
                   <input
                     type="number"
+                    min="100"
                     name="count"
                     placeholder="100"
                     className="max-w-44 focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-3xl"
