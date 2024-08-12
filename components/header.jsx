@@ -44,7 +44,7 @@ export default function Header({ path = "" }) {
           className="w-8 h-8 absolute right-[2rem] block"
         />
         <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
-          <Link href="">Головна</Link>
+          <Link href="/">Головна</Link>
           <hr />
           <Link href="/shop">Продукція</Link>
           <hr />

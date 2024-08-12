@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import LoadingPage from "../loading";
 import ModalWindow from "@/components/modal-window";
+import Footer from "@/components/footer";
 
 export default function Tovar() {
   const router = useRouter();
@@ -282,6 +283,7 @@ export default function Tovar() {
                 </button>
               </form>
             </section>
+            {/* <Footer path="../" /> */}
           </>
         )}
       </>

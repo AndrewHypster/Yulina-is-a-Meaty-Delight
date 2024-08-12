@@ -3,38 +3,33 @@ import { useEffect } from "react";
 export default function ModalWindow({ type = "", text = "", scroll = window.scrollY }) {
   useEffect(() => {
     const modalContent = document.querySelector(".modal-content");
+    const modalWindow = document.querySelector(".modal-window");
+    const findClass = (clas, clasArr) => {
+      return [...clasArr].filter(str => str.includes(clas))[0];
+    }
     
     switch (type) {
       case "Success":
-        modalContent.classList.remove("bg-amber-500");
-        modalContent.classList.remove("bg-red-600");
-        modalContent.classList.remove("bg-my-white");
+        modalContent.classList.remove(findClass('bg-', modalContent.classList));
         modalContent.classList.add("bg-lime-600");
+        modalWindow.style.top = `${scroll}px`;
         break;
       case "Warning":
-        modalContent.classList.remove("bg-lime-600");
-        modalContent.classList.remove("bg-red-600");
-        modalContent.classList.remove("bg-my-white");
+        modalContent.classList.remove(findClass('bg-', modalContent.classList));
         modalContent.classList.add("bg-amber-500");
+        modalWindow.style.top = `${scroll}px`;
         break;
       case "Error":
-        modalContent.classList.remove("bg-amber-500");
-        modalContent.classList.remove("bg-lime-600");
-        modalContent.classList.remove("bg-my-white");
+        modalContent.classList.remove(findClass('bg-', modalContent.classList));
         modalContent.classList.add("bg-red-600");
-        break;
-
-      default:
-        modalContent.classList.remove("bg-amber-500");
-        modalContent.classList.remove("bg-lime-600");
-        modalContent.classList.remove("bg-red-600");
-        modalContent.classList.add("bg-my-white");
+        modalWindow.style.top = `${scroll}px`;
         break;
     }
   });
 
   const hidden = () => {
     document.querySelector(".modal-window").style = `display: none; top: ${window.scrollY}`;
+    window.scrollTo(0, scroll)
     document.body.style = "overflow: scroll";
   };
 
