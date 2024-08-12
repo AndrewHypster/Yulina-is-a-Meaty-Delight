@@ -2,9 +2,12 @@ import Banner from "@/components/banner";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
 import Error from "next/error";
+import LoadingPage from "../loading";
+import ModalWindow from "@/components/modal-window";
+import Footer from "@/components/footer";
 import Image from "next/image";
+
 import { useRouter } from "next/router";
-import shop from "../../shop.json";
 // Swiper
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -15,9 +18,7 @@ import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import LoadingPage from "../loading";
-import ModalWindow from "@/components/modal-window";
-import Footer from "@/components/footer";
+import shop from "../../shop.json";
 
 export default function Tovar() {
   const router = useRouter();
@@ -69,7 +70,6 @@ export default function Tovar() {
             text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
             scroll: window.scrollY,
           });
-          modalWindow.style = `display: grid; top: ${window.scrollY}`;
         });
       document.body.style = "overflow: hidden";
       setModal({
@@ -77,7 +77,6 @@ export default function Tovar() {
         text: "Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося",
         scroll: window.scrollY,
       });
-      modalWindow.style = `display: grid; top: ${window.scrollY}`;
     } else {
       document.body.style = "overflow: hidden";
       setModal({
@@ -85,7 +84,6 @@ export default function Tovar() {
         text: "Заповніть усі поля!",
         scroll: window.scrollY,
       });
-      modalWindow.style = `display: grid; top: ${window.scrollY}`;
     }
   };
 
@@ -283,9 +281,93 @@ export default function Tovar() {
                 </button>
               </form>
             </section>
-            {/* <Footer path="../" /> */}
+
+            {/* ------------------------------- *\
+                В І Д Г У К И   К Л І Є Н Т І В
+            \* -------------------------------- */}
+            <section>
+              <h2 className="bg-my-black py-6 2sm:py-8 text-center text-my-white text-2xl 3sm:text-3xl 2sm:text-4xl font-bold font-ubuntu tracking-wider">
+                Відгуки наших клієнтів
+              </h2>
+              <div className="lg:max-w-6xl py-11 px-8 mx-auto grid lg:flex flex-wrap justify-between gap-y-14 lg:gap-y-16">
+                <Feedback
+                  uName="Андрій"
+                  uLName="Гречух"
+                  uOld="20"
+                  date="2024.12.08"
+                  rating="5"
+                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
+                />
+                <Feedback
+                  uName="Андрій"
+                  uLName="Гречух"
+                  uOld="20"
+                  date="2024.12.08"
+                  rating="4"
+                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
+                />
+                <Feedback
+                  uName="Андрій"
+                  uLName="Гречух"
+                  uOld="20"
+                  date="2024.12.08"
+                  rating="3"
+                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
+                />
+                <Feedback
+                  uName="Андрій"
+                  uLName="Гречух"
+                  uOld="20"
+                  date="2024.12.08"
+                  rating="2"
+                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
+                />
+              </div>
+            </section>
+            <Footer path="../" />
           </>
         )}
       </>
     );
 }
+
+const Feedback = ({ uImg, uName, uLName, uOld, date, rating, text }) => {
+  return (
+    <div className="max-w-lg">
+      <div className="flex items-center gap-5">
+        {uImg ? (
+          <img src={uImg} alt="фото користувача" />
+        ) : (
+          <h3 className="w-20 h-20 text-center content-center rounded-full bg-[#D9D9D9] font-semibold text-my-black text-2xl tracking-wider">
+            {uName[0] + uLName[0]}
+          </h3>
+        )}
+        <div>
+          <div className="flex gap-2 items-baseline">
+            <h3 className="font-ubuntu font-semibold text-my-black text-2xl">{`${uName} ${uLName[0]}.`}</h3>
+            <p className="font-light font-ubuntu">{date}</p>
+          </div>
+          <div className="flex mt-[-12px] items-center gap-2">
+            <h4 className="font-ubuntu text-my-black text-xl">{uOld}р</h4>
+            <div className="user-stars">
+              <style jsx>{`
+                .user-stars::before {
+                  content: "★★★★★";
+                  font-size: 26px;
+                  background: linear-gradient(
+                    to right,
+                    #ed8a19 ${(rating/5)*100}%,
+                    #5C5C5C 0%
+                  );
+                  -webkit-background-clip: text;
+                  color: transparent;
+                }
+              `}</style>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p className="mt-3.5 text-xl font-extralight font-ubuntu">{text}</p>
+    </div>
+  );
+};
