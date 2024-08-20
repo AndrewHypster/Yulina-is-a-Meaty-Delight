@@ -23,9 +23,9 @@ export default function Header({ path = "" }) {
       </div>
 
       <div className="hidden xl:flex items-end gap-2">
-        <a href="/user/some-id">
+        <Link href="/user/some-id">
           <Image src={path + "icons/user.svg"} width='40' height='40' />
-        </a>
+        </Link>
         <address className="h-fit font-inter text-base grid">
         <Link href="tel:+000000000000">+000 (00) 000-00-00</Link>
         <Link href="mailto:info@gmail.com">info@gmail.com</Link>
@@ -34,7 +34,7 @@ export default function Header({ path = "" }) {
       
 
       {/* Б О К О В Е   М Е Н Ю */}
-      <a
+      <Link
         href="#menu"
         style={{ backgroundImage: `url(${path}icons/menu.svg)` }}
         className="w-8 h-8 bg-cover cursor-pointer hover:brightness-[3] ml:hidden"
