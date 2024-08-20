@@ -22,11 +22,18 @@ export default function Header({ path = "" }) {
         </nav>
       </div>
 
-      <address className="h-fit font-inter text-base hidden xl:grid">
+      <div className="hidden xl:flex items-end gap-2">
+        <a href="/user/some-id">
+          <Image src={path + "icons/user.svg"} width='40' height='40' />
+        </a>
+        <address className="h-fit font-inter text-base grid">
         <Link href="tel:+000000000000">+000 (00) 000-00-00</Link>
         <Link href="mailto:info@gmail.com">info@gmail.com</Link>
       </address>
+      </div>
+      
 
+      {/* Б О К О В Е   М Е Н Ю */}
       <a
         href="#menu"
         style={{ backgroundImage: `url(${path}icons/menu.svg)` }}
@@ -45,6 +52,8 @@ export default function Header({ path = "" }) {
         />
         <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
           <Link href="/">Головна</Link>
+          <hr />
+          <Link href="/user/some-id">Кабінет</Link>
           <hr />
           <Link href="/shop">Продукція</Link>
           <hr />
