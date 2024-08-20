@@ -44,7 +44,7 @@ export default function Header({ path = "" }) {
         id="menu"
         className="w-screen h-screen fixed z-10 top-0 left-full target:left-0 p-8 bg-my-white"
       >
-        <a
+        <Link
           href="#"
           style={{ backgroundImage: `url(${path}icons/x.svg)` }}
           alt=""
