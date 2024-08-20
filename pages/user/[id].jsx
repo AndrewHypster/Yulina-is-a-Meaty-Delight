@@ -202,7 +202,7 @@ export default function User({ path = "", title }) {
             <ul className="grid gap-3.5 text-bodily">
               <li>
                 <div className="flex justify-between flex-wrap items-baseline">
-                  <h3 className="h-fit font-pt-sans-narrow text-4xl">Ім'я</h3>
+                  <h3 className="h-fit font-pt-sans-narrow text-4xl">Ім&apos;я</h3>
                   <p>Андрій Хіпстер</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
