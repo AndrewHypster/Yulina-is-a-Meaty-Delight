@@ -34,7 +34,7 @@ export default function Header({ path = "" }) {
       
 
       {/* Б О К О В Е   М Е Н Ю */}
-      <Link
+      <a
         href="#menu"
         style={{ backgroundImage: `url(${path}icons/menu.svg)` }}
         className="w-8 h-8 bg-cover cursor-pointer hover:brightness-[3] ml:hidden"
@@ -44,7 +44,7 @@ export default function Header({ path = "" }) {
         id="menu"
         className="w-screen h-screen fixed z-10 top-0 left-full target:left-0 p-8 bg-my-white"
       >
-        <Link
+        <a
           href="#"
           style={{ backgroundImage: `url(${path}icons/x.svg)` }}
           alt=""
