@@ -76,7 +76,7 @@ export default function User({ path = "", title }) {
         </div>
         <div className="flex ml:grid pt-20 lg:pt-0 flex-col-reverse grid-cols-2 ml:gap-64 lg:gap-[370px] bg-dark-brown relative">
           {/* І С Т О Р І Я   З А М О В Л Е Н Ь */}
-          <div className="min-w-96 ml:w-fit mx-auto ml:mx-0 p-8 pt-12 3sm:p-12 xl0:p-16 pb-10 justify-self-end">
+          <div className="ml:w-fit mx-auto ml:mx-0 p-8 pt-12 3sm:p-12 xl0:p-16 pb-10 justify-self-end">
             <h2 className="3xl:w-[435px] text-center font-ubuntu mb-11 text-4xl ml:text-4xl 3xl:text-5xl text-bodily font-bold">
               Замовлення
             </h2>
@@ -124,7 +124,7 @@ export default function User({ path = "", title }) {
             style={{ backgroundImage: "url('/icons/circle.svg')" }}
           />
           {/* І Н Ф О Р М А Ц І Я */}
-          <div className="min-w-96 ml:w-fit mx-auto ml:mx-0 p-8 pt-12 3sm:p-12 xl0:p-16 pb-10">
+          <div className="ml:w-fit mx-auto ml:mx-0 p-8 pt-12 3sm:p-12 xl0:p-16 pb-10">
             <h2 className="3xl:w-[435px] text-center font-ubuntu mb-11 text-5xl ml:text-4xl 3xl:text-5xl text-bodily font-bold">
               Інформація
             </h2>
