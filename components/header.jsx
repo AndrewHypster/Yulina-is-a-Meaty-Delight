@@ -42,7 +42,7 @@ export default function Header({ path = "" }) {
 
       <div
         id="menu"
-        className="w-screen h-screen fixed z-10 top-0 left-full target:left-0 p-8 bg-my-white"
+        className="w-screen h-screen fixed z-50 top-0 left-full target:left-0 p-8 bg-my-white"
       >
         <a
           href="#"

@@ -37,7 +37,9 @@ module.exports = {
       'lg': '1041px',
       'xl0': '1150px',
       'xl': '1280px',
+      'xl1': '1290px',
       '2xl': '1401px',
+      '3xl': '1495px',
     },
   },
   plugins: [
