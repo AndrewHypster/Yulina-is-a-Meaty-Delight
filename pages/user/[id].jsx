@@ -22,13 +22,13 @@ export default function User({ path = "", title }) {
           </h1>
           {/* Центральні фото */}
           <div className="h-[270px] w-[335px] 3sm:w-[392px] absolute top-1 lg:top-0 right-1/2 translate-x-1/2 grid justify-items-center">
-            <div className="absolute mx-auto top-0 gap-8 3sm:gap-11 lg:gap-[61px] flex">
+            <div className="absolute mx-auto top-0 gap-3 4sm:gap-8 3sm:gap-11 lg:gap-[61px] flex">
               <Image
                 src="/icons/crow.svg"
                 width="90"
                 height="90"
                 alt="crow"
-                className="mt-14 rotate-[-47deg]"
+                className="mt-10 4sm:mt-14 rotate-[-47deg]"
               />
               <Image
                 src="/icons/crow.svg"
@@ -42,7 +42,7 @@ export default function User({ path = "", title }) {
                 width="90"
                 height="90"
                 alt="crow"
-                className="mt-14 rotate-[47deg]"
+                className="mt-10 4sm:mt-14 rotate-[47deg]"
               />
             </div>
             <Image
