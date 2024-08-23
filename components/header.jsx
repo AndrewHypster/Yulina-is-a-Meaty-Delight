@@ -71,7 +71,11 @@ export default function Header({ path = "" }) {
           <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
             <Link href="/">Головна</Link>
             <hr />
-            <Link href="/user/some-id">Кабінет</Link>
+            {isAutorise ? (
+              <Link href="/user/some-id">Кабінет</Link>
+            ) : (
+              <a href="#sign-in">Кабінет</a>
+            )}
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />
