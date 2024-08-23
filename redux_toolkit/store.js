@@ -1,13 +1,13 @@
 'use client';
 
 import { configureStore } from "@reduxjs/toolkit";
+import { createWrapper } from "next-redux-wrapper";
 import userReducer from "./features/user/userSlice";
 
-export const store = configureStore ({
+export const makeStore = () => configureStore ({
   reducer: {
     user: userReducer,
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const wrapper = createWrapper(makeStore)

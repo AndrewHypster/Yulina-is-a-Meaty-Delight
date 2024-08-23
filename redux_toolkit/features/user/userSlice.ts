@@ -14,7 +14,7 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setState: (state, action) => { state.isAutorise = action.payload},
+    setState: (state, action) => {state.isAutorise = action.payload},
   }
 })
 

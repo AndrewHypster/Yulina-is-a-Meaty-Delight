@@ -18,6 +18,7 @@ import Footer from "@/components/footer";
 
 import shop from "../shop.json";
 import LoadingPage from "./loading";
+import SignIn from "@/components/sign/in";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
