@@ -1,8 +1,10 @@
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
+  const router = useRouter()
 
   const register = (btn) => {
     const [name, lastName, phone, pass, secPass] = btn.target.form;
@@ -34,6 +36,7 @@ export default function Sign({ type }) {
       })
       .then((resp) => {
         localStorage.setItem('userID', resp.data.id)
+        router.push('/user/' + resp.data.id)
       })
       .catch((error) => {
         console.log(error);
