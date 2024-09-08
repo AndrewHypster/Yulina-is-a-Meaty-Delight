@@ -19,6 +19,7 @@ import Footer from "@/components/footer";
 import shop from "../shop.json";
 import LoadingPage from "./loading";
 import SignIn from "@/components/sign/in";
+import TestPage from "./test";
 
 export default function Home() {
   const [loading, setLoading] = useState(true);
@@ -46,6 +47,7 @@ export default function Home() {
       <MyHead title="Головна" />
       <Header />
       <Banner />
+      <TestPage />
       <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex">
         {" "}
         {/* 1400px */}

@@ -1,15 +1,22 @@
-import { setState } from "@/redux_toolkit/features/user/userSlice";
 import Image from "next/image";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
 import SignIn from "@/components/sign/in";
 import SocialIcons from "./social-icons";
+import Register from "./sign/register";
+import { useRouter } from "next/router";
 
 export default function Header({ path = "" }) {
-  const isAutorise = useSelector((state) => state.user.isAutorise);
-  const dispatch = useDispatch();
-  // dispatch(setState(true))
-  // console.log(isAutorise);
+  const router = useRouter()
+
+  const autorise = () => {
+    const userID = localStorage.getItem('userID')
+
+    if(userID) {
+      router.push(`/user/${userID}`)
+    } else {
+      document.querySelector('#sign-in').style.display = 'flex'
+    }
+  }
 
   return (
     <>
@@ -35,15 +42,9 @@ export default function Header({ path = "" }) {
         </div>
 
         <div className="hidden xl:flex items-end gap-2">
-          {isAutorise ? (
-            <Link href="/user/some-id">
-              <Image src={path + "icons/user.svg"} width="40" height="40" />
-            </Link>
-          ) : (
-            <a href="#sign-in">
-              <Image src={path + "icons/user.svg"} width="40" height="40" />
-            </a>
-          )}
+          <button onClick={() => autorise()}>
+            <Image src={path + "icons/user.svg"} width="40" height="40" />
+          </button>
 
           <address className="h-fit font-inter text-base grid">
             <Link href="tel:+000000000000">+000 (00) 000-00-00</Link>
@@ -71,11 +72,11 @@ export default function Header({ path = "" }) {
           <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
             <Link href="/">Головна</Link>
             <hr />
-            {isAutorise ? (
-              <Link href="/user/some-id">Кабінет</Link>
-            ) : (
+            {/* {isAutorise ? ( */}
+              {/* <Link href="/user/some-id">Кабінет</Link> */}
+            {/* ) : ( */}
               <a href="#sign-in">Кабінет</a>
-            )}
+            {/* )} */}
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />
@@ -95,6 +96,7 @@ export default function Header({ path = "" }) {
         </div>
       </header>
       <SignIn />
+      <Register />
     </>
   );
 }

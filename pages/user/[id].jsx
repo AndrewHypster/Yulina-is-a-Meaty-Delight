@@ -1,12 +1,29 @@
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export default function User({ path = "", title }) {
   const router = useRouter();
-  const { id } = router.query;
+  const [userInfo, setUserInfo] = useState({});
+ 
+  useEffect(() => {
+    const { id } = router.query;
+    axios
+      .post("/api/users?work=get-user", {
+        userID: id,
+      })
+      .then((resp) => {
+        setUserInfo(resp.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [router.query.id]);
+
   return (
     <>
       <MyHead title="Кабінет" path="../../" />
@@ -81,34 +98,36 @@ export default function User({ path = "", title }) {
               Замовлення
             </h2>
             <ul className="grid gap-3.5 text-bodily">
-              <li className="max-w-md">
-                <div className="flex justify-between gap-8">
-                  <div className="">
-                    <h3 className="h-fit font-marck-script text-2xl xl:text-3xl xl1:text-4xl">
-                      Міні сосиски
-                    </h3>
-                    <h4 className="font-ubuntu text-xs xl:text-sm xl1:text-base uppercase leading-3 font-extralight">
-                      Гарячі яловичі палички
-                    </h4>
-                  </div>
-                  <div className="content-end">
-                    <small className="h-fit mb-1.5 text-xs xl:text-[80%] text-right block">
-                      12.08.2024
-                    </small>
-                    <div className="flex gap-4 items-baseline">
-                      <p className="font-ubuntu text-xs xl:text-base uppercase leading-3 font-extralight">
-                        ₴1200
-                      </p>
-                      <p className="font-ubuntu text-xs xl:text-base uppercase leading-3 font-extralight">
-                        12кг
-                      </p>
+              {userInfo.orders?.map((order) => {
+                <li className="max-w-md">
+                  <div className="flex justify-between gap-8">
+                    <div className="">
+                      <h3 className="h-fit font-marck-script text-2xl xl:text-3xl xl1:text-4xl">
+                        Міні сосиски
+                      </h3>
+                      <h4 className="font-ubuntu text-xs xl:text-sm xl1:text-base uppercase leading-3 font-extralight">
+                        Гарячі яловичі палички
+                      </h4>
+                    </div>
+                    <div className="content-end">
+                      <small className="h-fit mb-1.5 text-xs xl:text-[80%] text-right block">
+                        12.08.2024
+                      </small>
+                      <div className="flex gap-4 items-baseline">
+                        <p className="font-ubuntu text-xs xl:text-base uppercase leading-3 font-extralight">
+                          ₴1200
+                        </p>
+                        <p className="font-ubuntu text-xs xl:text-base uppercase leading-3 font-extralight">
+                          12кг
+                        </p>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
-              </li>
+                  <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
+                </li>;
+              })}
             </ul>
+
             <div className="grid">
               <Image
                 src="/icons/chicken-leg.svg"
@@ -134,7 +153,9 @@ export default function User({ path = "", title }) {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Ім&apos;я
                   </h3>
-                  <p>Андрій Хіпстер</p>
+                  <p>
+                    {userInfo.name} {userInfo.lastName}
+                  </p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -143,7 +164,7 @@ export default function User({ path = "", title }) {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     День народження
                   </h3>
-                  <p>2024.04.21</p>
+                  <p>{userInfo.birthday}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -152,7 +173,7 @@ export default function User({ path = "", title }) {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телефон
                   </h3>
-                  <p>+380685325881</p>
+                  <p>{userInfo.contacts? userInfo.contacts.phone:''}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -161,7 +182,7 @@ export default function User({ path = "", title }) {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телеграм
                   </h3>
-                  <p>https://t.me/Monoliz1503</p>
+                  <p>{userInfo.contacts? userInfo.contacts.telegram:''}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -170,7 +191,7 @@ export default function User({ path = "", title }) {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Пошта
                   </h3>
-                  <p>andrii.hrechukh@gmail.com</p>
+                  <p>{userInfo.contacts? userInfo.contacts.malto:''}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
