@@ -1,4 +1,3 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
 import SignIn from "@/components/sign/in";
@@ -17,17 +16,13 @@ export default function Header() {
   useEffect(() => {
     const updatePath = () => {
       const newPath =
-        window.location.pathname === "/"
+      router.asPath === "/"
           ? ""
-          : "../".repeat(window.location.pathname.split("/").length - 1);
+          : "../".repeat(router.asPath.split("/").length - 1);
       dispatch(setPath(newPath));
       localStorage.setItem("pathPhoto", newPath);
     };
     updatePath();
-    window.addEventListener("popstate", updatePath);
-    return () => {
-      window.removeEventListener("popstate", updatePath);
-    };
   }, []);
 
   const autorise = () => {
