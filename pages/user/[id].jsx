@@ -27,8 +27,8 @@ export default function User() {
 
   return (
     <>
-      <MyHead title="Кабінет" path="../../" />
-      <Header path="../../" />
+      <MyHead title="Кабінет" />
+      <Header />
       <section>
         {/* Ш А П К А */}
         <div className="h-52 3sm:h-56 lg:h-[270px] flex gap-[420px] items-center bg-bodily justify-center relative gap-7 z-10">
