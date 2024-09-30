@@ -1,3 +1,4 @@
+'use client'
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
@@ -6,7 +7,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-export default function User({ path = "", title }) {
+export default function User() {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({});
  
