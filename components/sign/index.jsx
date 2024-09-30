@@ -1,10 +1,13 @@
 
 import axios from "axios";
 import Image from "next/image";
-import ModalWindow from "@/components/modal-window";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import dynamic from 'next/dynamic';
+
+// Динамічний імпорт компонента без SSR
+const ModalWindow = dynamic(() => import('@/components/modal-window'), { ssr: false });
 
 export default function Sign({ type }) {
   const isRegister = type == "register";

@@ -207,7 +207,7 @@ export default function User() {
           </div>
         </div>
       </section>
-      <Footer path="../" />
+      <Footer />
     </>
   );
 }

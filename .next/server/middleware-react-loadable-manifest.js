@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST="{}"
+self.__REACT_LOADABLE_MANIFEST="{\"components\\\\sign\\\\index.jsx -> @/components/modal-window\":{\"id\":\"components\\\\sign\\\\index.jsx -> @/components/modal-window\",\"files\":[\"static/chunks/components_modal-window_jsx.js\"]}}"
