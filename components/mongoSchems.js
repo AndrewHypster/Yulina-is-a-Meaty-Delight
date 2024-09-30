@@ -26,7 +26,7 @@ const userSchema = new Schema({
       },
       mail: {
         type: String,
-      }
+      },
     },
     required: true,
   },
@@ -39,4 +39,4 @@ const userSchema = new Schema({
   },
 });
 
-export { userSchema }
+export { userSchema };

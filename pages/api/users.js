@@ -102,7 +102,9 @@ export default async function Users(req, res) {
                 id: finded["_id"],
               });
             } catch (err) {
-              return res.status(400).json({ error: `Помилка при авторизації: ${err}` });
+              return res
+                .status(400)
+                .json({ error: `Помилка при авторизації: ${err}` });
             } finally {
               await mongoose.connection.close();
               console.log("Close DB");

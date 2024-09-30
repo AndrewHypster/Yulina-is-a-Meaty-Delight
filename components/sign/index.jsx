@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import axios from "axios";
 import Image from "next/image";
 import ModalWindow from "@/components/modal-window";
@@ -9,7 +9,7 @@ export default function Sign({ type }) {
   const isRegister = type == "register";
   const router = useRouter();
   const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
-  const path = localStorage.getItem('pathPhoto');
+  const path = localStorage.getItem("pathPhoto");
 
   const register = (btn) => {
     const [name, lastName, phone, pass, secPass] = btn.target.form;

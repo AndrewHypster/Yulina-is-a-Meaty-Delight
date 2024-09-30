@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Banner from "@/components/banner";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
@@ -99,10 +99,7 @@ export default function Tovar() {
             <MyHead title={shop.all[id].name} />
             <Header />
             <Banner />
-            <ModalWindow
-              type={modal.type}
-              text={modal.text}
-            />
+            <ModalWindow type={modal.type} text={modal.text} />
             <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
               <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
                 <Image
@@ -356,8 +353,8 @@ const Feedback = ({ uImg, uName, uLName, uOld, date, rating, text }) => {
                   font-size: 26px;
                   background: linear-gradient(
                     to right,
-                    #ed8a19 ${(rating/5)*100}%,
-                    #5C5C5C 0%
+                    #ed8a19 ${(rating / 5) * 100}%,
+                    #5c5c5c 0%
                   );
                   -webkit-background-clip: text;
                   color: transparent;

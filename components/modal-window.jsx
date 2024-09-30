@@ -1,29 +1,33 @@
-'use client'
+"use client";
 import { useEffect } from "react";
 
-export default function ModalWindow({ type = "", text = "", scroll = window.scrollY }) {
+export default function ModalWindow({
+  type = "",
+  text = "",
+  scroll = window.scrollY,
+}) {
   useEffect(() => {
     const modalContent = document.querySelector(".modal-content");
     const modalWindow = document.querySelector(".modal-window");
     const findClass = (clas, clasArr) => {
-      return [...clasArr].filter(str => str.includes(clas))[0];
-    }
-    
+      return [...clasArr].filter((str) => str.includes(clas))[0];
+    };
+
     switch (type) {
       case "Success":
-        modalContent.classList.remove(findClass('bg-', modalContent.classList));
+        modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-lime-600");
         modalWindow.style.top = `${scroll}px`;
         modalWindow.style.display = `flex`;
         break;
       case "Warning":
-        modalContent.classList.remove(findClass('bg-', modalContent.classList));
+        modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-amber-500");
         modalWindow.style.top = `${scroll}px`;
         modalWindow.style.display = `flex`;
         break;
       case "Error":
-        modalContent.classList.remove(findClass('bg-', modalContent.classList));
+        modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-red-600");
         modalWindow.style.top = `${scroll}px`;
         modalWindow.style.display = `flex`;
@@ -32,8 +36,10 @@ export default function ModalWindow({ type = "", text = "", scroll = window.scro
   });
 
   const hidden = () => {
-    document.querySelector(".modal-window").style = `display: none; top: ${window.scrollY}`;
-    window.scrollTo(0, scroll)
+    document.querySelector(
+      ".modal-window"
+    ).style = `display: none; top: ${window.scrollY}`;
+    window.scrollTo(0, scroll);
     document.body.style = "overflow: scroll";
   };
 
@@ -58,7 +64,9 @@ export default function ModalWindow({ type = "", text = "", scroll = window.scro
           </button>
         </div>
         <div className="px-4 py-3 text-my-white">
-          <h2 className="mb-1 3sm:mb-2 text-xl 3sm:text-3xl font-semibold">{type}</h2>
+          <h2 className="mb-1 3sm:mb-2 text-xl 3sm:text-3xl font-semibold">
+            {type}
+          </h2>
           <p className="text-sm 3sm:text-base">{text}</p>
         </div>
         <button

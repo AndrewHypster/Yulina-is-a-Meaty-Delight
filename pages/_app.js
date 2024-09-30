@@ -4,9 +4,7 @@ import "@/styles/slider.css";
 import { Providers } from "../redux_toolkit/provider";
 
 const App = ({ Component, pageProps }) => {
-  return (
-    <Component {...pageProps} />
-  );
-}
+  return <Component {...pageProps} />;
+};
 
 export default wrapper.withRedux(App);

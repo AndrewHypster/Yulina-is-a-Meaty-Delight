@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import SignIn from "@/components/sign/in";
@@ -16,11 +16,9 @@ export default function Header() {
       const newPath =
         window.location.pathname === "/"
           ? ""
-          : "../".repeat(
-              window.location.pathname.split("/").length - 1
-            );
+          : "../".repeat(window.location.pathname.split("/").length - 1);
       setPathPhoto(newPath);
-      localStorage.setItem('pathPhoto', newPath)
+      localStorage.setItem("pathPhoto", newPath);
     };
     updatePath();
     window.addEventListener("popstate", updatePath);

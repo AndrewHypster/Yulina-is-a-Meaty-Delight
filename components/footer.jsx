@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import Image from "next/image";
 import SocialIcons from "./social-icons";
 
 export default function Footer() {
-  const path = localStorage.getItem('pathPhoto')
+  const path = localStorage.getItem("pathPhoto");
   return (
     <footer className="h-[460px] px-10 pt-8 4sm:px-14 2sm:pt-12 2sm:px-20 shadow-[inset_0_6px_5px_rgba(0,0,0,0.25)] grid">
       <div className="flex justify-between">

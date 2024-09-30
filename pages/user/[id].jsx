@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 export default function User() {
   const router = useRouter();
   const [userInfo, setUserInfo] = useState({});
- 
+
   useEffect(() => {
     const { id } = router.query;
     axios
@@ -174,7 +174,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телефон
                   </h3>
-                  <p>{userInfo.contacts? userInfo.contacts.phone:''}</p>
+                  <p>{userInfo.contacts ? userInfo.contacts.phone : ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -183,7 +183,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телеграм
                   </h3>
-                  <p>{userInfo.contacts? userInfo.contacts.telegram:''}</p>
+                  <p>{userInfo.contacts ? userInfo.contacts.telegram : ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -192,7 +192,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Пошта
                   </h3>
-                  <p>{userInfo.contacts? userInfo.contacts.malto:''}</p>
+                  <p>{userInfo.contacts ? userInfo.contacts.malto : ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>

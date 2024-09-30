@@ -1,9 +1,9 @@
-'use client'
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Banner() {
-  const path = localStorage.getItem('pathPhoto')
+  const path = localStorage.getItem("pathPhoto");
   return (
     <aside className="h-[160px] bg-gradient-to-r from-dark-red to-[#A53C3C] items-center flex">
       <div className="w-fit mx-auto text-my-white items-center flex">
@@ -21,7 +21,10 @@ export default function Banner() {
           <p className="text-xl italic hidden ml:block">
             Спробуйте найсмачніше сушене м&apos;ясо від Юлі
           </p>
-          <Link href='/shop' className="mx-auto col-span-2 ml:col-span-1 gap-2 ml:gap-0">
+          <Link
+            href="/shop"
+            className="mx-auto col-span-2 ml:col-span-1 gap-2 ml:gap-0"
+          >
             <button className="h-11 w-[205px] rounded-full border-my-white border-4 hover:text-dark-red hover:bg-my-white bg-light-brown text-2xl font-bold">
               Купити зараз
             </button>
