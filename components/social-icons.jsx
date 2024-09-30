@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function SocialIcons({ initsize, size, styles = "" }) {
