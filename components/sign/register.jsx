@@ -1,4 +1,4 @@
-"use client";
+
 import Sign from ".";
 
 export default function Register() {

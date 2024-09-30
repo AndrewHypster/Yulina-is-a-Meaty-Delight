@@ -1,9 +1,10 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 export default function Banner() {
-  const path = localStorage.getItem("pathPhoto");
+  const path = useSelector((state) => state.path.photo);
   return (
     <aside className="h-[160px] bg-gradient-to-r from-dark-red to-[#A53C3C] items-center flex">
       <div className="w-fit mx-auto text-my-white items-center flex">

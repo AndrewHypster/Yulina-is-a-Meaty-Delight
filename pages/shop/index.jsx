@@ -1,4 +1,3 @@
-"use client";
 import Banner from "@/components/banner";
 import CardSlider from "@/components/card-slider";
 import Footer from "@/components/footer";
@@ -20,7 +19,7 @@ export default function Shop() {
     return (
       <>
         <MyHead title="Магазин" />
-        <Header path="../" />
+        <Header />
         <Banner />
         <div className="flex">
           <div className="w-36 justify-center place-items-center hidden md:grid">

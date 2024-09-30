@@ -2,11 +2,11 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import userReducer from "./features/user/userSlice";
+import pathReducer from "./features/path/pathSlice";
 
 export const makeStore = () => configureStore ({
   reducer: {
-    user: userReducer,
+    path: pathReducer,
   },
 });
 

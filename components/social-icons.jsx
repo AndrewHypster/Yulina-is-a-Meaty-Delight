@@ -1,9 +1,10 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 export default function SocialIcons({ initsize, size, styles = "" }) {
-  const path = localStorage.getItem("pathPhoto");
+  const path = useSelector((state) => state.path.photo);
   return (
     <>
       <Link

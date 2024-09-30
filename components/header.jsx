@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import Link from "next/link";
 import SignIn from "@/components/sign/in";
@@ -6,10 +5,13 @@ import SocialIcons from "./social-icons";
 import Register from "./sign/register";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setPath } from "@/redux_toolkit/features/path/pathSlice";
 
 export default function Header() {
   const router = useRouter();
-  const [pathPhoto, setPathPhoto] = useState("");
+  const dispatch = useDispatch();
+  const pathPhoto = useSelector((state) => state.path.photo);
 
   useEffect(() => {
     const updatePath = () => {
@@ -17,7 +19,7 @@ export default function Header() {
         window.location.pathname === "/"
           ? ""
           : "../".repeat(window.location.pathname.split("/").length - 1);
-      setPathPhoto(newPath);
+      dispatch(setPath(newPath));
       localStorage.setItem("pathPhoto", newPath);
     };
     updatePath();

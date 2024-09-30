@@ -1,15 +1,16 @@
-"use client";
+
 import axios from "axios";
 import Image from "next/image";
 import ModalWindow from "@/components/modal-window";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
   const router = useRouter();
   const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
-  const path = localStorage.getItem("pathPhoto");
+  const path = useSelector((state) => state.path.photo);
 
   const register = (btn) => {
     const [name, lastName, phone, pass, secPass] = btn.target.form;
