@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function SocialIcons({ path = "", initsize, size, styles = "" }) {
+export default function SocialIcons({ initsize, size, styles = "" }) {
+  const path = localStorage.getItem('pathPhoto')
   return (
     <>
       <Link

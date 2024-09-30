@@ -80,13 +80,14 @@ export default async function Users(req, res) {
       // A U T H O R I S E   U S E R
       else if (req.query.work === "authorise") {
         const { phone, password } = req.body;
+        console.log(phone, password);
 
         const finded = await User.findOne({
           "contacts.phone": phone,
         });
-        const isCurrectUser = (finded.password = password);
-
-        if (isCurrectUser) {
+        console.log("finded", finded);
+        // const isCurrectUser = (finded.password == password);
+        if (finded) {
           async function updateUser() {
             try {
               const updatedDoc = await User.findByIdAndUpdate(
@@ -101,13 +102,17 @@ export default async function Users(req, res) {
                 id: finded["_id"],
               });
             } catch (err) {
-              res.send("Помилка при авторизації:", err);
+              return res.status(400).json({ error: `Помилка при авторизації: ${err}` });
             } finally {
               await mongoose.connection.close();
               console.log("Close DB");
             }
           }
           updateUser();
+        } else {
+          await mongoose.connection.close();
+          console.log("Close DB");
+          return res.status(400).json({ error: "Невірний логін чи пароль!" });
         }
       }
 

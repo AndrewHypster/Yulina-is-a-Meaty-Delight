@@ -95,13 +95,12 @@ export default function Tovar() {
           <Error statusCode={404} />
         ) : (
           <>
-            <MyHead path="../" title={shop.all[id].name} />
-            <Header path="../" />
-            <Banner path="../" />
+            <MyHead title={shop.all[id].name} />
+            <Header />
+            <Banner />
             <ModalWindow
               type={modal.type}
               text={modal.text}
-              scroll={modal.scroll}
             />
             <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
               <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">

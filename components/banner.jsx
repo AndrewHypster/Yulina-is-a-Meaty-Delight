@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Banner({ path='' }) {
+export default function Banner() {
+  const path = localStorage.getItem('pathPhoto')
   return (
     <aside className="h-[160px] bg-gradient-to-r from-dark-red to-[#A53C3C] items-center flex">
       <div className="w-fit mx-auto text-my-white items-center flex">

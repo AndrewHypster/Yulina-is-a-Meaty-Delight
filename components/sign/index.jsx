@@ -1,10 +1,14 @@
 import axios from "axios";
 import Image from "next/image";
+import ModalWindow from "@/components/modal-window";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
-  const router = useRouter()
+  const router = useRouter();
+  const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
+  const path = localStorage.getItem('pathPhoto');
 
   const register = (btn) => {
     const [name, lastName, phone, pass, secPass] = btn.target.form;
@@ -20,6 +24,7 @@ export default function Sign({ type }) {
         })
         .then((response) => {
           console.log(response.data);
+          btn.target.form.offsetParent.style.display = "none";
         })
         .catch((error) => {
           console.log(error);
@@ -29,18 +34,31 @@ export default function Sign({ type }) {
 
   const log = (btn) => {
     const [phone, password] = btn.target.form;
-    axios
-      .post("/api/users?work=authorise", {
-        phone: phone.value,
-        password: password.value,
-      })
-      .then((resp) => {
-        localStorage.setItem('userID', resp.data.id)
-        router.push('/user/' + resp.data.id)
-      })
-      .catch((error) => {
-        console.log(error);
+    console.log(phone.value, password.value);
+    if (phone.value && password.value) {
+      axios
+        .post("/api/users?work=authorise", {
+          phone: phone.value,
+          password: password.value,
+        })
+        .then((resp) => {
+          console.log(resp);
+          localStorage.setItem("userID", resp.data.id);
+          router.push("/user/" + resp.data.id);
+          btn.target.form.offsetParent.style.display = "none";
+        })
+        .catch((err) => {
+          setModal({
+            type: "Error",
+            text: `Error ${err.response.status}: ${err.response.data.error}`,
+          });
+        });
+    } else {
+      setModal({
+        type: "Error",
+        text: `Error 400: Заповніть усі поля!`,
       });
+    }
   };
 
   return (
@@ -48,10 +66,18 @@ export default function Sign({ type }) {
       id={type}
       className="fixed top-0 left-0 w-screen h-screen z-20 bg-[#2b2a3096] flex-wrap content-center justify-center hidden target:flex"
     >
-      <form className="w-96 px-7 py-12 pb-8 bg-dark-brown rounded-2xl">
+      <form className="w-96 px-7 py-12 pb-8 bg-dark-brown rounded-2xl relative">
+        <p
+          className="absolute top-4 right-6 text-my-white text-2xl cursor-pointer"
+          onClick={(x) =>
+            (x.target.offsetParent.offsetParent.style.display = "none")
+          }
+        >
+          x
+        </p>
         <Image
           className="mx-auto"
-          src={`./icons/${type}.svg`}
+          src={`${path}icons/${type}.svg`}
           width="150"
           height="150"
         />
@@ -68,7 +94,7 @@ export default function Sign({ type }) {
           <Input label="Пароль" name="pass" />
           {isRegister ? <Input label="Пароль щераз" name="secpass" /> : <></>}
         </div>
-        <a href="#">
+        <a>
           <button
             type="button"
             onClick={(btn) => (isRegister ? register(btn) : log(btn))}
@@ -79,14 +105,30 @@ export default function Sign({ type }) {
         </a>
         <div className="flex justify-between">
           {isRegister ? (
-            <a href="#sign-in" className="mx-auto">
+            <a
+              onClick={(a) => {
+                a.target.offsetParent.offsetParent.style.display = "none";
+                a.target.parentElement.parentElement.parentElement.previousSibling.style.display =
+                  "flex";
+              }}
+              className="mx-auto"
+            >
               Увійти
             </a>
           ) : (
-            <a href="#register">Зареєструватись</a>
+            <a
+              onClick={(a) => {
+                a.target.offsetParent.offsetParent.style.display = "none";
+                a.target.parentElement.parentElement.parentElement.nextSibling.style.display =
+                  "flex";
+              }}
+            >
+              Зареєструватись
+            </a>
           )}
         </div>
       </form>
+      <ModalWindow type={modal.type} text={modal.text} />
     </div>
   );
 }
