@@ -20,7 +20,6 @@ export default function Header() {
           ? ""
           : "../".repeat(router.asPath.split("/").length - 1);
       dispatch(setPath(newPath));
-      localStorage.setItem("pathPhoto", newPath);
     };
     updatePath();
   }, []);

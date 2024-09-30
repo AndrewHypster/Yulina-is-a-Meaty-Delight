@@ -86,8 +86,8 @@ export default async function Users(req, res) {
           "contacts.phone": phone,
         });
         console.log("finded", finded);
-        // const isCurrectUser = (finded.password == password);
-        if (finded) {
+        const isCurrectUser = finded? finded.password == password : false;
+        if (isCurrectUser) {
           async function updateUser() {
             try {
               const updatedDoc = await User.findByIdAndUpdate(
