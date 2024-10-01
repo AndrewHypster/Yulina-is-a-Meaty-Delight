@@ -25,7 +25,7 @@ export default function Header() {
   }, []);
 
   const autorise = () => {
-    const userID = localStorage.getItem("userID");
+    const userID = localStorage.getItem("userInfo")?._id;
 
     if (userID) {
       router.push(`/user/${userID}`);

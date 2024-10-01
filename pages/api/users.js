@@ -99,7 +99,7 @@ export default async function Users(req, res) {
               );
               res.send({
                 message: "Користувача авторизовано",
-                id: finded["_id"],
+                userInfo: finded,
               });
             } catch (err) {
               return res

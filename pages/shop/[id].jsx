@@ -27,9 +27,9 @@ export default function Tovar() {
 
   const [weight, setWeight] = useState({ count: 100, type: 1 });
   const [user, setUser] = useState({ name: null, contact: null });
-
   const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
+
   useEffect(() => {
     setLoading(false);
     if (window.innerWidth <= 690) setSlides(3);
@@ -38,8 +38,8 @@ export default function Tovar() {
 
   const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
   const sendTgBot = () => {
-    const modalWindow = document.querySelector(".modal-window");
-    if (user.name && user.contact) {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+    if (user) {
       const text = `
       Нове замовлення!
       \n
@@ -53,14 +53,20 @@ export default function Tovar() {
       Кількість: ${weight.count} ${weight.type === 1 ? "гр" : "кг"}
       \n
       Контакти
-      Ім'я: ${user.name}
-      тел: ${user.contact}
+      Ім'я: ${user.name} ${user.lastName}
+      тел: ${user.contacts.phone}
       `;
 
       axios
-        .post("/api/tg-bot", { text: text })
+        .post(
+          "/api/tg-bot",
+          { text: text },
+          {
+            "Content-Type": "application/json",
+          }
+        )
         .then((response) => {
-          console.log(response.data);
+          console.log("Респонс відповідь", response.data);
         })
         .catch((error) => {
           console.error("There was an error!", error);
@@ -68,21 +74,18 @@ export default function Tovar() {
           setModal({
             type: "Error",
             text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
-            scroll: window.scrollY,
           });
         });
       document.body.style = "overflow: hidden";
       setModal({
         type: "Success",
         text: "Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося",
-        scroll: window.scrollY,
       });
     } else {
       document.body.style = "overflow: hidden";
       setModal({
         type: "Warning",
         text: "Заповніть усі поля!",
-        scroll: window.scrollY,
       });
     }
   };
@@ -248,7 +251,7 @@ export default function Tovar() {
                     <option value="кг">КГ</option>
                   </select>
                 </div>
-                <div className="grid 4sm:flex 4sm:gap-4">
+                {/* <div className="grid 4sm:flex 4sm:gap-4">
                   <input
                     id="userName"
                     type="text"
@@ -267,7 +270,7 @@ export default function Tovar() {
                     }
                     className="max-w-40 mt-4 rounded-full border-[2px] border-my-black focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-2xl"
                   />
-                </div>
+                </div> */}
                 <button
                   type="button"
                   className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"

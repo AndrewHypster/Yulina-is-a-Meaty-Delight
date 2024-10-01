@@ -39,7 +39,6 @@ export default function Sign({ type }) {
 
   const log = (btn) => {
     const [phone, password] = btn.target.form;
-    console.log(phone.value, password.value);
     if (phone.value && password.value) {
       axios
         .post("/api/users?work=authorise", {
@@ -47,9 +46,8 @@ export default function Sign({ type }) {
           password: password.value,
         })
         .then((resp) => {
-          console.log(resp);
-          localStorage.setItem("userID", resp.data.id);
-          router.push("/user/" + resp.data.id);
+          localStorage.setItem("userInfo", JSON.stringify(resp.data.userInfo));
+          router.push("/user/" + resp.data.userInfo._id);
           btn.target.form.offsetParent.style.display = "none";
         })
         .catch((err) => {

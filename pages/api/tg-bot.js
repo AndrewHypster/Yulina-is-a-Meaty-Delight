@@ -1,21 +1,36 @@
-// Тг бот: https://t.me/Yulina_Is_A_Meaty_Delight_bot
+// пароль пошти julia1503
 
-import TelegramBot from "node-telegram-bot-api";
-import chat from "./tg-admin.json";
+import nodemailer from 'nodemailer';
 
-const token = "7235691978:AAFdF1cjp2n35xofnhbmF2ATkHjyGTPm3_8";
-const bot = new TelegramBot(token, { polling: false });
+export default async function handler(req, res) {
+  if (req.method === 'POST') {
+    const { text } = req.body;
 
-export default function handler(req, res) {
-  if (req.method === "POST") {
-    const message = req.body;
+    // Налаштування Nodemailer з використанням Gmail
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'andrewgrechukh123@gmail.com', // ваш Gmail акаунт
+        pass: 'oxcf etmt fuon bmie', // пароль або спеціальний "app password" з налаштувань безпеки
+      },
+    });
 
-    const chatId = chat.id;
-    const responseMessage = message.text;
-    bot.sendMessage(chatId, responseMessage);
+    const mailOptions = {
+      from: 'andrewgrechukh123@gmail.com', // відправник
+      to: 'andrewgrechukh123@gmail.com', // отримувач
+      subject: 'Замовлення', // тема листа
+      text: text, // тіло листа
+    };
 
-    res.status(200).send("OK");
+    try {
+      // Відправка листа
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'Email sent successfully!' });
+    } catch (error) {
+      console.error('Error sending email:', error);
+      res.status(500).json({ message: 'Failed to send email', error });
+    }
   } else {
-    res.status(405).send("Method Not Allowed тре метод POST");
+    res.status(405).json({ message: 'Method not allowed' });
   }
 }
