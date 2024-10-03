@@ -30,7 +30,6 @@ export default function Tovar() {
   const [weight, setWeight] = useState({ count: 100, type: 1 });
   const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
-  
 
   useEffect(() => {
     setLoading(false);
@@ -42,7 +41,7 @@ export default function Tovar() {
 
   const sendTgBot = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
-    console.log('user', user??false);
+    console.log("user", user ?? false);
     if (user) {
       const text = `
       Нове замовлення!
@@ -63,7 +62,7 @@ export default function Tovar() {
 
       axios
         .post(
-          "/api/tg-bot",
+          "/api/gmail-bot",
           { text: text },
           {
             "Content-Type": "application/json",
@@ -71,25 +70,30 @@ export default function Tovar() {
         )
         .then((response) => {
           console.log("Респонс відповідь", response.data);
+          dispatch(
+            setModal({
+              type: "Success",
+              text: response.data.message,
+            })
+          );
         })
         .catch((error) => {
           console.error("There was an error!", error);
           document.body.style = "overflow: hidden";
-          dispatch(setModal({
-            type: "Error",
-            text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
-          }))
+          dispatch(
+            setModal({
+              type: "Error",
+              text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
+            })
+          );
         });
-      document.body.style = "overflow: hidden";
-      setModalId({
-        type: "Success",
-        text: "Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося",
-      });
     } else {
-      dispatch(setModal({
-        type: "Warning",
-        text: "Увійдіть в свій кабінет!",
-      }))
+      dispatch(
+        setModal({
+          type: "Warning",
+          text: "Увійдіть в свій кабінет!",
+        })
+      );
     }
   };
 

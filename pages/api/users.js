@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-import { userSchema } from "@/components/mongoSchems";
+import { userSchema } from "@/pages/api/mongoSchems";
 
 const db =
   "mongodb+srv://Andrii:Monoliz_1503@yulina-is-a-meaty-delig.5lgdn.mongodb.net/users?retryWrites=true&w=majority&appName=yulina-is-a-meaty-delight";
