@@ -25,27 +25,30 @@ export default function ModalWindow() {
         modalContent.classList.add("bg-lime-600");
         modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
+        document.body.style = "overflow: hidden";
         break;
       case "Warning":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-amber-500");
         modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
+        document.body.style = "overflow: hidden";
         break;
       case "Error":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-red-600");
         modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
+        document.body.style = "overflow: hidden";
         break;
       case "Hidden":
         modalWindow.style.display = `none`;
+        document.body.style = "overflow: scroll";
         break;
     }
   }, [modal]);
 
   const hidden = () => {
-    document.body.style = "overflow: scroll";
     dispatch(
       setModal({
         type: "Hidden",
@@ -57,7 +60,7 @@ export default function ModalWindow() {
   return (
     <div
       className="modal-window w-screen h-screen absolute z-20 bg-[#2b2a3096] content-center justify-center items-center"
-      style={{ top: scroll, display: "none" }}
+      style={{ display: "none" }}
     >
       <div className="modal-content w-64 3sm:w-96 2sm:w-[32rem] h-52 3sm:h-60 2sm:h-80 rounded-lg relative">
         {/* Header */}
