@@ -4,6 +4,6 @@
   "/_document": "pages/_document.js",
   "/shop/[id]": "pages/shop/[id].js",
   "/shop": "pages/shop.js",
-  "/user/[id]": "pages/user/[id].js",
+  "/": "pages/index.js",
   "/api/gmail-bot": "pages/api/gmail-bot.js"
 }

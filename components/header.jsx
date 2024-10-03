@@ -13,7 +13,6 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathPhoto = useSelector((state) => state.path.photo);
-  const { modalType, modalText } = useSelector((state) => state.modal);
   const [modal, setModal] = useState({ type: null, text: null });
 
   useEffect(() => {

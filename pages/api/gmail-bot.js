@@ -10,14 +10,14 @@ export default async function handler(req, res) {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: {
-        user: 'andrewgrechukh123@gmail.com', // ваш Gmail акаунт
-        pass: 'oxcf etmt fuon bmie', // пароль або спеціальний "app password" з налаштувань безпеки
+        user: process.env.GMAIL_USER, // ваш Gmail акаунт
+        pass: process.env.GMAIL_PASS, // спеціальний "app password" з налаштувань безпеки
       },
     });
 
     const mailOptions = {
-      from: 'andrewgrechukh123@gmail.com', // відправник
-      to: 'andrewgrechukh123@gmail.com', // отримувач
+      from: process.env.GMAIL_USER, // відправник
+      to: process.env.GMAIL_USER, // отримувач
       subject: 'Замовлення', // тема листа
       text: text, // тіло листа
     };
