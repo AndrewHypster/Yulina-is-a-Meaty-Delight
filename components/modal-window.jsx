@@ -12,9 +12,9 @@ export default function ModalWindow() {
   }, [modalType, modalText]);
 
   useEffect(() => {
+    debugger
     const modalContent = document.querySelector(".modal-content");
     const modalWindow = document.querySelector(".modal-window");
-    const scroll = window.scrollY;
     const findClass = (clas, clasArr) => {
       return [...clasArr].filter((str) => str.includes(clas))[0];
     };
@@ -23,19 +23,19 @@ export default function ModalWindow() {
       case "Success":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-lime-600");
-        modalWindow.style.top = `${scroll}px`;
+        modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
         break;
       case "Warning":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-amber-500");
-        modalWindow.style.top = `${scroll}px`;
+        modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
         break;
       case "Error":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-red-600");
-        modalWindow.style.top = `${scroll}px`;
+        modalWindow.style.top = `${window.scrollY}px`;
         modalWindow.style.display = `flex`;
         break;
       case "Hidden":
