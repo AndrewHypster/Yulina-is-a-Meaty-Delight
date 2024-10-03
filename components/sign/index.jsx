@@ -2,17 +2,13 @@
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import dynamic from 'next/dynamic';
-
-// Динамічний імпорт компонента без SSR
-const ModalWindow = dynamic(() => import('@/components/modal-window'), { ssr: false });
+import { useDispatch, useSelector } from "react-redux";
+import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
   const router = useRouter();
-  const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
+  const dispatch = useDispatch();
   const path = useSelector((state) => state.path.photo);
 
   const register = (btn) => {
@@ -51,16 +47,16 @@ export default function Sign({ type }) {
           btn.target.form.offsetParent.style.display = "none";
         })
         .catch((err) => {
-          setModal({
+          dispatch(setModal({
             type: "Error",
             text: `Error ${err.response.status}: ${err.response.data.error}`,
-          });
+          }))
         });
     } else {
-      setModal({
+      dispatch(setModal({
         type: "Error",
         text: `Error 400: Заповніть усі поля!`,
-      });
+      }))
     }
   };
 
@@ -131,7 +127,6 @@ export default function Sign({ type }) {
           )}
         </div>
       </form>
-      <ModalWindow type={modal.type} text={modal.text} />
     </div>
   );
 }

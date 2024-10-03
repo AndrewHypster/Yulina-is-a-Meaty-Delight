@@ -7,16 +7,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPath } from "@/redux_toolkit/features/path/pathSlice";
+import ModalWindow from "./modal-window";
 
 export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathPhoto = useSelector((state) => state.path.photo);
+  const { modalType, modalText } = useSelector((state) => state.modal);
+  const [modal, setModal] = useState({ type: null, text: null });
 
   useEffect(() => {
     const updatePath = () => {
       const newPath =
-      router.asPath === "/"
+        router.asPath === "/"
           ? ""
           : "../".repeat(router.asPath.split("/").length - 1);
       dispatch(setPath(newPath));
@@ -25,7 +28,7 @@ export default function Header() {
   }, []);
 
   const autorise = () => {
-    const userID = localStorage.getItem("userInfo")?._id;
+    const userID = JSON.parse(localStorage.getItem("userInfo"))?._id;
 
     if (userID) {
       router.push(`/user/${userID}`);
@@ -88,11 +91,7 @@ export default function Header() {
           <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
             <Link href="/">Головна</Link>
             <hr />
-            {/* {isAutorise ? ( */}
-            {/* <Link href="/user/some-id">Кабінет</Link> */}
-            {/* ) : ( */}
-            <a href="#sign-in">Кабінет</a>
-            {/* )} */}
+            <a onClick={() => autorise()}>Кабінет</a>
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />
@@ -114,6 +113,7 @@ export default function Header() {
 
       <SignIn />
       <Register />
+      <ModalWindow type={modal.type} text={modal.text} />
     </>
   );
 }

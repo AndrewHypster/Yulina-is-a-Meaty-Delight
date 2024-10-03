@@ -3,7 +3,6 @@ import Header from "@/components/header";
 import MyHead from "@/components/myHead";
 import Error from "next/error";
 import LoadingPage from "../loading";
-import ModalWindow from "@/components/modal-window";
 import Footer from "@/components/footer";
 import Image from "next/image";
 
@@ -19,16 +18,19 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import shop from "../../shop.json";
+import { useDispatch } from "react-redux";
+import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
 
 export default function Tovar() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { id } = router.query;
   const hasTovar = shop.all.some((tovar) => tovar.id === +id);
 
   const [weight, setWeight] = useState({ count: 100, type: 1 });
-  const [user, setUser] = useState({ name: null, contact: null });
   const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
+  
 
   useEffect(() => {
     setLoading(false);
@@ -36,9 +38,11 @@ export default function Tovar() {
     if (window.innerWidth <= 332) setSlides(2);
   }, []);
 
-  const [modal, setModal] = useState({ type: null, text: null, scroll: 0 });
+  const [modalId, setModalId] = useState({ type: null, text: null });
+
   const sendTgBot = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
+    console.log('user', user??false);
     if (user) {
       const text = `
       Нове замовлення!
@@ -71,22 +75,21 @@ export default function Tovar() {
         .catch((error) => {
           console.error("There was an error!", error);
           document.body.style = "overflow: hidden";
-          setModal({
+          dispatch(setModal({
             type: "Error",
             text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
-          });
+          }))
         });
       document.body.style = "overflow: hidden";
-      setModal({
+      setModalId({
         type: "Success",
         text: "Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося",
       });
     } else {
-      document.body.style = "overflow: hidden";
-      setModal({
+      dispatch(setModal({
         type: "Warning",
-        text: "Заповніть усі поля!",
-      });
+        text: "Увійдіть в свій кабінет!",
+      }))
     }
   };
 
@@ -101,7 +104,6 @@ export default function Tovar() {
             <MyHead title={shop.all[id].name} />
             <Header />
             <Banner />
-            <ModalWindow type={modal.type} text={modal.text} />
             <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
               <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
                 <Image

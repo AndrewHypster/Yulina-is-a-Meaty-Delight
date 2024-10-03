@@ -2,9 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/shop/[id]": "pages/shop/[id].js",
-  "/api/users": "pages/api/users.js",
-  "/user/[id]": "pages/user/[id].js",
   "/": "pages/index.js",
-  "/api/tg-bot": "pages/api/tg-bot.js"
+  "/shop/[id]": "pages/shop/[id].js",
+  "/shop": "pages/shop.js"
 }

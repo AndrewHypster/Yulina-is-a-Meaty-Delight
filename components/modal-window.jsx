@@ -1,18 +1,25 @@
-import { useEffect } from "react";
+import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function ModalWindow({
-  type = "",
-  text = "",
-  scroll = window.scrollY,
-}) {
+export default function ModalWindow() {
+  const dispatch = useDispatch();
+  const { modalType, modalText } = useSelector((state) => state.modal);
+  const [modal, setModalState] = useState({ type: null, text: null });
+
+  useEffect(() => {
+    setModalState({ type: modalType, text: modalText });
+  }, [modalType, modalText]);
+
   useEffect(() => {
     const modalContent = document.querySelector(".modal-content");
     const modalWindow = document.querySelector(".modal-window");
+    const scroll = window.scrollY;
     const findClass = (clas, clasArr) => {
       return [...clasArr].filter((str) => str.includes(clas))[0];
     };
-
-    switch (type) {
+    debugger;
+    switch (modal.type) {
       case "Success":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
         modalContent.classList.add("bg-lime-600");
@@ -31,15 +38,20 @@ export default function ModalWindow({
         modalWindow.style.top = `${scroll}px`;
         modalWindow.style.display = `flex`;
         break;
+      case "Hidden":
+        modalWindow.style.display = `none`;
+        break;
     }
-  });
+  }, [modal]);
 
   const hidden = () => {
-    document.querySelector(
-      ".modal-window"
-    ).style = `display: none; top: ${window.scrollY}`;
-    window.scrollTo(0, scroll);
     document.body.style = "overflow: scroll";
+    dispatch(
+      setModal({
+        type: "Hidden",
+        text: "",
+      })
+    );
   };
 
   return (
@@ -64,9 +76,9 @@ export default function ModalWindow({
         </div>
         <div className="px-4 py-3 text-my-white">
           <h2 className="mb-1 3sm:mb-2 text-xl 3sm:text-3xl font-semibold">
-            {type}
+            {modal.type}
           </h2>
-          <p className="text-sm 3sm:text-base">{text}</p>
+          <p className="text-sm 3sm:text-base">{modal.text}</p>
         </div>
         <button
           className="absolute left-2/4 translate-x-[-50%] block bottom-0 w-fit h-fit mb-4 2sm:mb-8 mx-auto px-10 3sm:px-8 2sm:px-16 py-1 2sm:py-2 border-2 3sm:border-4 border-my-white rounded-full close-modal border-0 text-my-white text-sm 3sm:text-xl font-semibold text-my-black hover:rotate-180"
