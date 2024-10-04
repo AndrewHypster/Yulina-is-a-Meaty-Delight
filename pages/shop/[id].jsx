@@ -83,7 +83,7 @@ export default function Tovar() {
           dispatch(
             setModal({
               type: "Error",
-              text: `Error ${error.response.status}: ${error.response.data.message} Код від Гугл апп:${error.response.data.pass_app}`,
+              text: `Error ${error.response.status}: ${error.response.data.message}`,
             })
           );
         });

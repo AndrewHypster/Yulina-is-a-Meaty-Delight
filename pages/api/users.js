@@ -1,14 +1,13 @@
 const { default: mongoose } = require("mongoose");
 import { userSchema } from "@/pages/api/mongoSchems";
 
-const db =
-  "mongodb+srv://Andrii:Monoliz_1503@yulina-is-a-meaty-delig.5lgdn.mongodb.net/users?retryWrites=true&w=majority&appName=yulina-is-a-meaty-delight";
+const db = process.env.USER_DB;
 
 export default async function Users(req, res) {
   try {
     // Чекаємо на підключення до бази даних
     await mongoose.connect(db);
-    console.log("Connected to DB");
+    console.log("Connected to User DB");
 
     const User = mongoose.models.user || mongoose.model("user", userSchema);
 
@@ -41,7 +40,7 @@ export default async function Users(req, res) {
             })
             .finally(() => {
               mongoose.connection.close();
-              console.log("Close DB");
+              console.log("Close User DB");
             });
         }
       }
@@ -60,7 +59,7 @@ export default async function Users(req, res) {
             console.error("Помилка при оновленні:", err);
           } finally {
             await mongoose.connection.close();
-            console.log("Close DB");
+            console.log("Close User DB");
           }
         }
         updateUser();
@@ -75,6 +74,8 @@ export default async function Users(req, res) {
           });
           res.send(finded);
         }
+        await mongoose.connection.close();
+        console.log("Close User DB");
       }
 
       // A U T H O R I S E   U S E R
@@ -107,13 +108,13 @@ export default async function Users(req, res) {
                 .json({ error: `Помилка при авторизації: ${err}` });
             } finally {
               await mongoose.connection.close();
-              console.log("Close DB");
+              console.log("Close User DB");
             }
           }
           updateUser();
         } else {
           await mongoose.connection.close();
-          console.log("Close DB");
+          console.log("Close User DB");
           return res.status(400).json({ error: "Невірний логін чи пароль!" });
         }
       }
@@ -134,13 +135,13 @@ export default async function Users(req, res) {
             console.error("Помилка при видаленні:", err);
           } finally {
             await mongoose.connection.close();
-            console.log("Close DB");
+            console.log("Close User DB");
           }
         }
         deleteUserById();
       }
     }
   } catch (error) {
-    console.error("Error connecting to DB:", error);
+    console.error("Error connecting to User DB:", error);
   }
 }

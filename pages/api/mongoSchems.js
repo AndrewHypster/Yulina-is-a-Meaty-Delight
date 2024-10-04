@@ -39,4 +39,39 @@ const userSchema = new Schema({
   },
 });
 
-export { userSchema };
+const productSchema = new Schema({
+  kind: {
+    type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  cost: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  photoUrl: {
+    type: String,
+    required: true,
+  },
+  isTop: {
+    type: Boolean,
+    require: true,
+  },
+  reviews: [
+    {
+      userName: { type: String, required: true },
+      rating: { type: Number, required: true, min: 1, max: 5 },
+      comment: { type: String },
+      date: { type: Date, default: Date.now },
+    },
+  ],
+});
+
+export { userSchema, productSchema };
