@@ -2,8 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/shop/[id]": "pages/shop/[id].js",
-  "/shop": "pages/shop.js",
   "/": "pages/index.js",
+  "/shop/[id]": "pages/shop/[id].js",
   "/api/gmail-bot": "pages/api/gmail-bot.js"
 }

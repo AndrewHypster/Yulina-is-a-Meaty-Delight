@@ -41,7 +41,7 @@ export default function Tovar() {
 
   const sendTgBot = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
-    console.log("user", user ?? false);
+
     if (user) {
       const text = `
       Нове замовлення!
@@ -83,7 +83,7 @@ export default function Tovar() {
           dispatch(
             setModal({
               type: "Error",
-              text: `Error 505: Проблема з сервером, спробуйте пізніше, або звяжіться з нами`,
+              text: `Error ${error.response.status}: ${error.response.data.message} Код від Гугл апп:${error.response.data.pass_app}`,
             })
           );
         });

@@ -5,20 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 export default function ModalWindow() {
   const dispatch = useDispatch();
   const { modalType, modalText } = useSelector((state) => state.modal);
-  const [modal, setModalState] = useState({ type: null, text: null });
+  const [modal, setModalState] = useState({ type: 'Hidden', text: '' });
 
   useEffect(() => {
     setModalState({ type: modalType, text: modalText });
   }, [modalType, modalText]);
 
   useEffect(() => {
-    debugger
     const modalContent = document.querySelector(".modal-content");
     const modalWindow = document.querySelector(".modal-window");
     const findClass = (clas, clasArr) => {
       return [...clasArr].filter((str) => str.includes(clas))[0];
-    };
-    debugger;
+    }
+    
     switch (modal.type) {
       case "Success":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));
@@ -77,6 +76,7 @@ export default function ModalWindow() {
             x
           </button>
         </div>
+        {/* Body */}
         <div className="px-4 py-3 text-my-white">
           <h2 className="mb-1 3sm:mb-2 text-xl 3sm:text-3xl font-semibold">
             {modal.type}
