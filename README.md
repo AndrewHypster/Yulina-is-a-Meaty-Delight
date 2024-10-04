@@ -2,7 +2,7 @@
 
 <small>_Магазинчик неймовірно смачних джерків від Юлі 😋_</small>
 
-<div align="center">
+<div align="center" style="display: flex; justify-content: space-between;">
 
 ![Static Badge](https://img.shields.io/badge/14.2.5-green?style=flat&logo=nextdotjs&label=Next.js&color=green&link=https%3A%2F%2Fnextjs.org%2F)
 ![Static Badge](https://img.shields.io/badge/2.2.7-orange?style=flat&logo=redux&label=ReduxToolkit&labelColor=764abc&link=https%3A%2F%2Fredux-toolkit.js.org%2F)
