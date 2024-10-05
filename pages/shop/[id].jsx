@@ -296,8 +296,9 @@ export default function Tovar() {
                 Відгуки наших клієнтів
               </h2>
               <div className="lg:max-w-6xl py-11 px-8 mx-auto grid lg:flex flex-wrap justify-between gap-y-14 lg:gap-y-16">
-                {product.reviews.map((review) => (
+                {product.reviews.map((review, index) => (
                   <Feedback
+                    key={index}
                     uName={review.userName}
                     date={review.date}
                     rating={review.rating}
