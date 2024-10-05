@@ -65,7 +65,7 @@ export default function Sign({ type }) {
       id={type}
       className="fixed top-0 left-0 w-screen h-screen z-20 bg-[#2b2a3096] flex-wrap content-center justify-center hidden target:flex"
     >
-      <form className="w-96 px-7 py-12 pb-8 bg-dark-brown rounded-2xl relative">
+      <form className="3sm:w-96 w-auto px-7 py-12 pb-8 bg-dark-brown rounded-2xl relative">
         <p
           className="absolute top-4 right-6 text-my-white text-2xl cursor-pointer"
           onClick={(x) =>
@@ -80,7 +80,7 @@ export default function Sign({ type }) {
           width="150"
           height="150"
         />
-        <div className="mt-2.5 mb-7 gap-0.5 grid">
+        <div className="w-56 4sm:w-72 3sm:w-auto mx-auto mt-2.5 mb-7 gap-0.5 grid">
           {isRegister ? (
             <div className="flex gap-5">
               <Input label="Ім'я" name="name" width="150" />
@@ -110,7 +110,7 @@ export default function Sign({ type }) {
                 a.target.parentElement.parentElement.parentElement.previousSibling.style.display =
                   "flex";
               }}
-              className="mx-auto"
+              className="mx-auto font-pt-sans-narrow tracking-wider text-my-white cursor-pointer"
             >
               Увійти
             </a>
@@ -121,6 +121,7 @@ export default function Sign({ type }) {
                 a.target.parentElement.parentElement.parentElement.nextSibling.style.display =
                   "flex";
               }}
+              className="font-pt-sans-narrow tracking-wider text-my-white cursor-pointer"
             >
               Зареєструватись
             </a>

@@ -21,7 +21,7 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         ubuntu: ["Ubuntu", "sans-serif"],
-        "long-cang": ["Long Cang", "cursive"],
+        "long-cang": ["LXGW WenKai TC", "cursive"],
         "marck-script": ["Marck Script", "cursive"],
         "pt-sans-narrow": ["PT Sans Narrow", "sans-serif"],
         "roboto-condensed": ["Roboto Condensed", "sans-serif"],

@@ -52,7 +52,7 @@ export default function Header() {
               height="64"
             />
           </Link>
-          <nav className="h-fit font-long-cang text-2xl gap-x-3 hidden ml:flex">
+          <nav className="h-fit font-long-cang font-bold text-2xl gap-x-3 hidden ml:flex">
             <Link href="/">Головна</Link>|<Link href="/shop">Продукція</Link>|
             <Link href="">Смаки</Link>|<Link href="">Про нас</Link>|
             <Link href="">Блог</Link>|<Link href="">Контакти</Link>
@@ -87,10 +87,10 @@ export default function Header() {
             alt=""
             className="w-8 h-8 absolute right-[2rem] block"
           />
-          <div className="mt-10 font-long-cang text-2xl gap-y-3 grid">
+          <div className="mt-10 font-long-cang font-bold text-2xl gap-y-3 grid">
             <Link href="/">Головна</Link>
             <hr />
-            <a onClick={() => autorise()}>Кабінет</a>
+            <a href="#" onClick={() => autorise()}>Кабінет</a>
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />
