@@ -82,7 +82,7 @@ export default function Sign({ type }) {
         />
         <div className="w-56 4sm:w-72 3sm:w-auto mx-auto mt-2.5 mb-7 gap-0.5 grid">
           {isRegister ? (
-            <div className="flex gap-5">
+            <div className="flex gap-2 3sm:gap-5">
               <Input label="Ім'я" name="name" width="150" />
               <Input label="Прізвище" name="lastname" width="150" />
             </div>

@@ -67,6 +67,7 @@ const productSchema = new Schema({
   reviews: [
     {
       userName: { type: String, required: true },
+      userLastName: { type: String, required: true },
       rating: { type: Number, required: true, min: 1, max: 5 },
       comment: { type: String },
       date: { type: Date, default: Date.now },

@@ -4,14 +4,31 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
 import SocialIcons from "@/components/social-icons";
+import axios from "axios";
 import { useEffect, useState } from "react";
-import shop from "../../shop.json";
 import LoadingPage from "../loading";
 
 export default function Shop() {
   const [loading, setLoading] = useState(true);
+  const [products, setProducts] = useState([]);
+  const [page, setPage] = useState(1);
+
+  function getProducts() {
+    axios
+      .post("/api/shop?work=get-products", {
+        page: page,
+        limit: 4,
+      })
+      .then((resp) => {
+        setProducts([...products, ...resp.data.products]);
+        setLoading(false);
+      })
+      .catch((err) => console.log("Помилка", err))
+      .finally(() => setPage(page + 1));
+  }
+
   useEffect(() => {
-    setLoading(false);
+    getProducts();
   }, []);
 
   if (loading) return <LoadingPage />;
@@ -28,16 +45,17 @@ export default function Shop() {
             </div>
           </div>
           <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center md:justify-start">
-            {shop.all.map((tovar) => (
+            {products?.map((product, index) => (
               <CardSlider
-                key={tovar.id}
-                id={tovar.id}
-                img={`/imgs/tovar/${tovar.id}.png`}
-                kind={tovar.kind}
-                name={tovar.name}
-                cost={tovar.cost}
+                key={index}
+                id={product._id}
+                img={`/imgs/tovar/${0}.png`}
+                kind={product.kind}
+                name={product.name}
+                cost={product.cost}
               />
             ))}
+            <button onClick={() => getProducts()}>Показати ще</button>
           </div>
         </div>
         <Footer />

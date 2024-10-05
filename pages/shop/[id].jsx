@@ -17,27 +17,34 @@ import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import shop from "../../shop.json";
 import { useDispatch } from "react-redux";
 import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
 
 export default function Tovar() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { id } = router.query;
-  const hasTovar = shop.all.some((tovar) => tovar.id === +id);
+  const [product, setProduct] = useState();
 
   const [weight, setWeight] = useState({ count: 100, type: 1 });
   const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
 
   useEffect(() => {
-    setLoading(false);
     if (window.innerWidth <= 690) setSlides(3);
     if (window.innerWidth <= 332) setSlides(2);
   }, []);
 
-  const [modalId, setModalId] = useState({ type: null, text: null });
+  useEffect(() => {
+    console.log(router.query.id);
+    if (router.query.id)
+      axios
+        .post("/api/shop?work=get-product", { id: router.query.id })
+        .then((resp) => {
+          setProduct(resp.data);
+          setLoading(false);
+        })
+        .catch((err) => console.log("Помилка", err));
+  }, router.query.id);
 
   const sendTgBot = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
@@ -46,13 +53,9 @@ export default function Tovar() {
       const text = `
       Нове замовлення!
       \n
-      Тип: ${shop.all[id].kind}
-      Назва: ${shop.all[id].name}
-      Ціна: ₴${(
-        +shop.all[id].cost *
-        (weight.count / 1000) *
-        weight.type
-      ).toFixed(2)}
+      Тип: ${product.kind}
+      Назва: ${product.name}
+      Ціна: ₴${(+product.cost * (weight.count / 1000) * weight.type).toFixed(2)}
       Кількість: ${weight.count} ${weight.type === 1 ? "гр" : "кг"}
       \n
       Контакти
@@ -101,20 +104,20 @@ export default function Tovar() {
   else
     return (
       <>
-        {!hasTovar ? (
+        {!product ? (
           <Error statusCode={404} />
         ) : (
           <>
-            <MyHead title={shop.all[id].name} />
+            <MyHead title={product.name} />
             <Header />
             <Banner />
             <section className="pb-4 md:py-4 flex flex-col md:grid grid-cols-[50%,50%] gap-8 xl:gap-20 md:bg-gradient-to-r from-mustard to-50% from-50% my-white">
               <div className="w-full md:max-w-lg bg-mustard md:bg-transparent self-center justify-self-center">
                 <Image
-                  src={`/imgs/tovar/${id}.png`}
+                  src={`/imgs/tovar/${0}.png`}
                   width="700"
                   height="700"
-                  alt={shop.all[id].name}
+                  alt={product.name}
                   className="w-96 lg:w-full mx-auto"
                 />
                 <Swiper
@@ -127,68 +130,68 @@ export default function Tovar() {
                 >
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                   <SwiperSlide>
                     <Image
-                      src={`/imgs/tovar/${id}.png`}
+                      src={`/imgs/tovar/${0}.png`}
                       width="700"
                       height="700"
-                      alt={shop.all[id].name}
+                      alt={product.name}
                     />
                   </SwiperSlide>
                 </Swiper>
               </div>
               <form className="max-w-lg mx-4 md:m-0 self-center">
                 <h2 className="w-fit font-marck-script text-my-black text-4xl ml:text-5xl xl0:text-6xl font-normal">
-                  {shop.all[id].kind}
+                  {product.kind}
                 </h2>
                 <h1 className="w-fit font-ubuntu text-my-black text-4xl ml:text-5xl xl0:text-6xl font-bold uppercase">
-                  {shop.all[id].name}
+                  {product.name}
                 </h1>
                 <div className="w-fit grid grid-cols-2 gap-4 content-center">
                   <div className="star-container">
@@ -219,11 +222,9 @@ export default function Tovar() {
                   className="block font-ubuntu font-medium text-my-black text-3xl"
                 >
                   ₴
-                  {(
-                    +shop.all[id].cost *
-                    (weight.count / 1000) *
-                    weight.type
-                  ).toFixed(2)}
+                  {(product.cost * (weight.count / 1000) * weight.type).toFixed(
+                    2
+                  )}
                 </span>
                 <b className="block my-6 font-roboto-condensed tracking-wider text-my-black text-xl">
                   ВКАЖІТЬ РОЗМІР
@@ -295,38 +296,14 @@ export default function Tovar() {
                 Відгуки наших клієнтів
               </h2>
               <div className="lg:max-w-6xl py-11 px-8 mx-auto grid lg:flex flex-wrap justify-between gap-y-14 lg:gap-y-16">
-                <Feedback
-                  uName="Андрій"
-                  uLName="Гречух"
-                  uOld="20"
-                  date="2024.12.08"
-                  rating="5"
-                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
-                />
-                <Feedback
-                  uName="Андрій"
-                  uLName="Гречух"
-                  uOld="20"
-                  date="2024.12.08"
-                  rating="4"
-                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
-                />
-                <Feedback
-                  uName="Андрій"
-                  uLName="Гречух"
-                  uOld="20"
-                  date="2024.12.08"
-                  rating="3"
-                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
-                />
-                <Feedback
-                  uName="Андрій"
-                  uLName="Гречух"
-                  uOld="20"
-                  date="2024.12.08"
-                  rating="2"
-                  text="Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло і тепер звжди купую на природу чи походи!"
-                />
+                {product.reviews.map((review) => (
+                  <Feedback
+                    uName={review.userName}
+                    date={review.date}
+                    rating={review.rating}
+                    text={review.comment}
+                  />
+                ))}
               </div>
             </section>
             <Footer />
@@ -344,12 +321,14 @@ const Feedback = ({ uImg, uName, uLName, uOld, date, rating, text }) => {
           <img src={uImg} alt="фото користувача" />
         ) : (
           <h3 className="w-20 h-20 text-center content-center rounded-full bg-[#D9D9D9] font-semibold text-my-black text-2xl tracking-wider">
-            {uName[0] + uLName[0]}
+            {uName /*[0] + uLName[0]*/}
           </h3>
         )}
         <div>
           <div className="flex gap-2 items-baseline">
-            <h3 className="font-ubuntu font-semibold text-my-black text-2xl">{`${uName} ${uLName[0]}.`}</h3>
+            <h3 className="font-ubuntu font-semibold text-my-black text-2xl">{
+              `${uName}` /*${uLName[0]}*/
+            }</h3>
             <p className="font-light font-ubuntu">{date}</p>
           </div>
           <div className="flex mt-[-12px] items-center gap-2">

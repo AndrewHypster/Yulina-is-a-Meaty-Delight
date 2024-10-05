@@ -69,6 +69,7 @@ export default async function Users(req, res) {
       else if (req.query.work === "get-user") {
         const { userID } = req.body;
         if (userID) {
+          console.log(userID);
           const finded = await User.findOne({
             _id: userID,
           });
