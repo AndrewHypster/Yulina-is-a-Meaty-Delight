@@ -9,7 +9,6 @@ import { useEffect, useState } from "react";
 import LoadingPage from "../loading";
 
 export default function Shop() {
-  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState([]);
   const [page, setPage] = useState(1);
 
@@ -21,7 +20,6 @@ export default function Shop() {
       })
       .then((resp) => {
         setProducts([...products, ...resp.data.products]);
-        setLoading(false);
       })
       .catch((err) => console.log("Помилка", err))
       .finally(() => setPage(page + 1));
@@ -31,7 +29,7 @@ export default function Shop() {
     getProducts();
   }, []);
 
-  if (loading) return <LoadingPage />;
+  if (!products[0]) return <LoadingPage />;
   else
     return (
       <>

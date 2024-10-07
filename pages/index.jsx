@@ -21,19 +21,30 @@ import Footer from "@/components/footer";
 import shop from "../shop.json";
 import LoadingPage from "./loading";
 import TestPage from "./test";
+import axios from "axios";
 
 export default function Home() {
-  const [loading, setLoading] = useState(true);
   const [slides, setSlides] = useState(4);
   const slideModules = [Navigation, Pagination, Scrollbar, A11y];
+  const [products, setProducts] = useState()
   useEffect(() => {
-    setLoading(false);
     if (window.innerWidth <= 1250) setSlides(3);
     if (window.innerWidth <= 980) setSlides(2);
     if (window.innerWidth <= 690) setSlides(1);
+
+    axios
+      .post("/api/shop?work=get-products", {
+        filter: {
+          isTop: true
+        }
+      })
+      .then((resp) => {
+        setProducts(resp.data.products);
+      })
+      .catch((err) => console.log("Помилка", err))
   }, []);
 
-  if (loading) return <LoadingPage />;
+  if (!products) return <LoadingPage />;
   else
     return (
       <>
@@ -42,8 +53,6 @@ export default function Home() {
         <Banner />
         <TestPage />
         <main className="px-8 py-10 2sm:py-20 xl:p-20 bg-bodily justify-center flex">
-          {" "}
-          {/* 1400px */}
           <div className="w-[680px] xl:w-auto 2xl:w-[700px] mx-auto xl:mx-0 text-dark-brown tracking-[-0.02em]">
             <h1 className="text-[1.6rem] 4sm:text-3xl 3sm:text-4xl 2sm:text-5xl md:text-6xl font-ubuntu font-medium">
               Сушене м&apos;ясо від Юлі!
@@ -98,15 +107,15 @@ export default function Home() {
             navigation
             className="select-none cursor-grab"
           >
-            {shop.top.map((topId) => (
-              <SwiperSlide key={topId}>
+            {products.map(product => (
+              <SwiperSlide key={product._id}>
                 <div className="w-fit mx-auto">
                   <CardSlider
-                    id={topId}
-                    img={`/imgs/tovar/${topId}.png`}
-                    kind={shop.all[topId].kind}
-                    name={shop.all[topId].name}
-                    cost={shop.all[topId].cost}
+                    id={product._id}
+                    img={`/imgs/tovar/${0}.png`}
+                    kind={product.kind}
+                    name={product.name}
+                    cost={product.cost}
                   />
                 </div>
               </SwiperSlide>

@@ -258,26 +258,7 @@ export default function Tovar() {
                     <option value="кг">КГ</option>
                   </select>
                 </div>
-                {/* <div className="grid 4sm:flex 4sm:gap-4">
-                  <input
-                    id="userName"
-                    type="text"
-                    placeholder="Ім'я"
-                    onChange={({ target }) =>
-                      setUser({ name: target.value, contact: user.contact })
-                    }
-                    className="max-w-40 mt-4 rounded-full border-[2px] border-my-black focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-2xl"
-                  />
-                  <input
-                    id="userCont"
-                    type="text"
-                    placeholder="Контакти"
-                    onChange={({ target }) =>
-                      setUser({ name: user.name, contact: target.value })
-                    }
-                    className="max-w-40 mt-4 rounded-full border-[2px] border-my-black focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-2xl"
-                  />
-                </div> */}
+                
                 <button
                   type="button"
                   className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
