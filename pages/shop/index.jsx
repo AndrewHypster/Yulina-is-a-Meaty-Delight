@@ -1,5 +1,5 @@
 import Banner from "@/components/banner";
-import CardSlider from "@/components/card-slider";
+import { CardProduct } from "@/components/card-product";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
@@ -44,7 +44,7 @@ export default function Shop() {
           </div>
           <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center md:justify-start">
             {products?.map((product, index) => (
-              <CardSlider
+              <CardProduct
                 key={index}
                 id={product._id}
                 img={`/imgs/tovar/${0}.png`}
