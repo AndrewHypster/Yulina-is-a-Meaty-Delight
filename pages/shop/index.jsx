@@ -10,6 +10,7 @@ import LoadingPage from "../loading";
 
 export default function Shop() {
   const [products, setProducts] = useState([]);
+  const [maxProducts, setMaxProducts] = useState(false);
   const [page, setPage] = useState(1);
 
   function getProducts() {
@@ -19,7 +20,12 @@ export default function Shop() {
         limit: 4,
       })
       .then((resp) => {
-        setProducts([...products, ...resp.data.products]);
+        if (resp.data.products?.length == 0) setMaxProducts(true);
+        else if (resp.data.products?.length < 4) {
+          setMaxProducts(true)
+          setProducts([...products, ...resp.data.products])
+        }
+        else setProducts([...products, ...resp.data.products]);
       })
       .catch((err) => console.log("Помилка", err))
       .finally(() => setPage(page + 1));
@@ -36,7 +42,7 @@ export default function Shop() {
         <MyHead title="Магазин" />
         <Header />
         <Banner />
-        <div className="flex">
+        <div className="flex pr-36">
           <div className="w-36 justify-center place-items-center hidden md:grid">
             <div className="grid h-fit gap-10 grid-flow-row-dense">
               <SocialIcons initsize="36" styles="rotate-[270deg]" />
@@ -53,7 +59,16 @@ export default function Shop() {
                 cost={product.cost}
               />
             ))}
-            <button onClick={() => getProducts()}>Показати ще</button>
+            <div className="w-full">
+              {!maxProducts ? (
+                <button
+                  className="block h-12 mx-auto px-16 border border-my-green hover:border-dark-red rounded-full shadow-[2px_4px_my-green] hover:shadow-dark-red font-ubuntu text-2xl font-medium text-my-green hover:text-dark-red"
+                  onClick={() => getProducts()}
+                >
+                  Показати ще
+                </button>
+              ): <></>}
+            </div>
           </div>
         </div>
         <Footer />

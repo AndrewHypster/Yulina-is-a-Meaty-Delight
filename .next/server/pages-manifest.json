@@ -3,5 +3,9 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.js",
-  "/api/shop": "pages/api/shop.js"
+  "/shop": "pages/shop.js",
+  "/user/[id]": "pages/user/[id].js",
+  "/api/shop": "pages/api/shop.js",
+  "/api/users": "pages/api/users.js",
+  "/shop/basket": "pages/shop/basket.js"
 }

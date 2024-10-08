@@ -13,7 +13,7 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathPhoto = useSelector((state) => state.path.photo);
-  const [modal, setModal] = useState({ type: null, text: null });
+  const [isUser, setIsUser] = useState(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     const updatePath = () => {
@@ -24,6 +24,8 @@ export default function Header() {
       dispatch(setPath(newPath));
     };
     updatePath();
+    
+    if (localStorage.getItem("userInfo")) setIsUser(true);
   }, []);
 
   const autorise = () => {
@@ -60,6 +62,18 @@ export default function Header() {
         </div>
 
         <div className="hidden xl:flex items-end gap-2">
+          {isUser ? (
+            <Link href="/shop/basket">
+              <Image
+                src={pathPhoto + "icons/basket.svg"}
+                width="40"
+                height="40"
+              />
+            </Link>
+          ) : (
+            <></>
+          )}
+
           <button onClick={() => autorise()}>
             <Image src={pathPhoto + "icons/user.svg"} width="40" height="40" />
           </button>
@@ -90,7 +104,9 @@ export default function Header() {
           <div className="mt-10 font-long-cang font-bold text-2xl gap-y-3 grid">
             <Link href="/">Головна</Link>
             <hr />
-            <a href="#" onClick={() => autorise()}>Кабінет</a>
+            <a href="#" onClick={() => autorise()}>
+              Кабінет
+            </a>
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />
@@ -112,7 +128,7 @@ export default function Header() {
 
       <SignIn />
       <Register />
-      <ModalWindow type={modal.type} text={modal.text} />
+      <ModalWindow />
     </>
   );
 }
