@@ -12,4 +12,4 @@
 
 Не комерційний проект, зроблений для портфоліо, вдосконалення своїх навичок в різних технологіях, написанні зрозумілішого коду.
 
-### [![Figma Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png) Figma макет](./public/icons/figma-logo.svg)
+### [![Figma Logo](https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Figma-logo.svg/1667px-Figma-logo.svg.png) Figma макет](./public/imgs/figma-logo.png)
