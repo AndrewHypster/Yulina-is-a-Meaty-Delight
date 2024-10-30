@@ -1,3 +1,5 @@
+"use client";
+
 import Banner from "@/components/banner";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
@@ -258,7 +260,7 @@ export default function Tovar() {
                     <option value="кг">КГ</option>
                   </select>
                 </div>
-                
+
                 <button
                   type="button"
                   className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
