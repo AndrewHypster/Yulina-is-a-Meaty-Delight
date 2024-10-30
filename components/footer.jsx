@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { useSelector } from "react-redux";
 import SocialIcons from "./social-icons";
