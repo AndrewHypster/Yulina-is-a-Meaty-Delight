@@ -1,9 +1,10 @@
+"use client";
 
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
-import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
+import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice.tsx";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
@@ -47,16 +48,20 @@ export default function Sign({ type }) {
           btn.target.form.offsetParent.style.display = "none";
         })
         .catch((err) => {
-          dispatch(setModal({
-            type: "Error",
-            text: `Error ${err.response.status}: ${err.response.data.error}`,
-          }))
+          dispatch(
+            setModal({
+              type: "Error",
+              text: `Error ${err.response.status}: ${err.response.data.error}`,
+            })
+          );
         });
     } else {
-      dispatch(setModal({
-        type: "Error",
-        text: `Error 400: Заповніть усі поля!`,
-      }))
+      dispatch(
+        setModal({
+          type: "Error",
+          text: `Error 400: Заповніть усі поля!`,
+        })
+      );
     }
   };
 

@@ -1,3 +1,5 @@
+"use client";
+
 import Banner from "@/components/banner";
 import { CardProduct } from "@/components/card-product";
 import Footer from "@/components/footer";
@@ -22,10 +24,9 @@ export default function Shop() {
       .then((resp) => {
         if (resp.data.products?.length == 0) setMaxProducts(true);
         else if (resp.data.products?.length < 4) {
-          setMaxProducts(true)
-          setProducts([...products, ...resp.data.products])
-        }
-        else setProducts([...products, ...resp.data.products]);
+          setMaxProducts(true);
+          setProducts([...products, ...resp.data.products]);
+        } else setProducts([...products, ...resp.data.products]);
       })
       .catch((err) => console.log("Помилка", err))
       .finally(() => setPage(page + 1));
@@ -67,7 +68,9 @@ export default function Shop() {
                 >
                   Показати ще
                 </button>
-              ): <></>}
+              ) : (
+                <></>
+              )}
             </div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+"use client";
 const { default: mongoose } = require("mongoose");
 import { productSchema } from "@/pages/api/mongoSchems";
 
@@ -77,14 +78,13 @@ export default async function Users(req, res) {
           const page = +req.body.page || 1;
           const limit = req.body.limit; // товарів на сторінку
           const skip = (page - 1) * limit;
-          const filter = req.body.filter
+          const filter = req.body.filter;
 
           // Отримати товари з MongoDB
-          let products
-          filter?
-            products = await Product.find(filter)
-          :
-            products = await Product.find({}).skip(skip).limit(limit);
+          let products;
+          filter
+            ? (products = await Product.find(filter))
+            : (products = await Product.find({}).skip(skip).limit(limit));
 
           res.status(200).json({ products: products });
         } catch (e) {

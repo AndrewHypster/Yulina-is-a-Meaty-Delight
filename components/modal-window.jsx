@@ -1,11 +1,13 @@
-import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
+"use client";
+
+import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice.tsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export default function ModalWindow() {
   const dispatch = useDispatch();
   const { modalType, modalText } = useSelector((state) => state.modal);
-  const [modal, setModalState] = useState({ type: 'Hidden', text: '' });
+  const [modal, setModalState] = useState({ type: "Hidden", text: "" });
 
   useEffect(() => {
     setModalState({ type: modalType, text: modalText });
@@ -16,8 +18,8 @@ export default function ModalWindow() {
     const modalWindow = document.querySelector(".modal-window");
     const findClass = (clas, clasArr) => {
       return [...clasArr].filter((str) => str.includes(clas))[0];
-    }
-    
+    };
+
     switch (modal.type) {
       case "Success":
         modalContent.classList.remove(findClass("bg-", modalContent.classList));

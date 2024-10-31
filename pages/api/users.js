@@ -1,3 +1,4 @@
+"use client";
 const { default: mongoose } = require("mongoose");
 import { userSchema } from "@/pages/api/mongoSchems";
 
@@ -88,7 +89,7 @@ export default async function Users(req, res) {
           "contacts.phone": phone,
         });
         console.log("finded", finded);
-        const isCurrectUser = finded? finded.password == password : false;
+        const isCurrectUser = finded ? finded.password == password : false;
         if (isCurrectUser) {
           async function updateUser() {
             try {

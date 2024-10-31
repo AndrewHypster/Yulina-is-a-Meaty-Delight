@@ -8,7 +8,7 @@ import Register from "./sign/register";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setPath } from "@/redux_toolkit/features/path/pathSlice";
+import { setPath } from "@/redux_toolkit/features/path/pathSlice.tsx";
 import ModalWindow from "./modal-window";
 
 export default function Header() {

@@ -1,10 +1,21 @@
-import { makeStore, wrapper } from "@/redux_toolkit/store";
+"use client";
+
+import { persistor, wrapper } from "@/redux_toolkit/store";
 import "@/styles/globals.css";
 import "@/styles/slider.css";
-import { Providers } from "../redux_toolkit/provider";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
 
 const App = ({ Component, pageProps }) => {
-  return <Component {...pageProps} />;
+  const { store } = wrapper.useWrappedStore(pageProps);
+
+  return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Component {...pageProps} />
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default wrapper.withRedux(App);
