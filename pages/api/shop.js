@@ -1,4 +1,3 @@
-"use client";
 const { default: mongoose } = require("mongoose");
 import { productSchema } from "@/pages/api/mongoSchems";
 

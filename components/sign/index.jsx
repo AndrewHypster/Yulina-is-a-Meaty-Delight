@@ -1,10 +1,9 @@
-"use client";
-
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice.tsx";
+import { setUser } from "@/redux_toolkit/features/user/userSlice";
 
 export default function Sign({ type }) {
   const isRegister = type == "register";
@@ -25,7 +24,16 @@ export default function Sign({ type }) {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          const { _id, name, lastName, contacts } = response.data;
+          dispatch(
+            setUser({
+              id: _id,
+              name,
+              lastName,
+              contacts,
+            })
+          );
+
           btn.target.form.offsetParent.style.display = "none";
         })
         .catch((error) => {
@@ -43,7 +51,15 @@ export default function Sign({ type }) {
           password: password.value,
         })
         .then((resp) => {
-          localStorage.setItem("userInfo", JSON.stringify(resp.data.userInfo));
+          const { _id, name, lastName, contacts } = resp.data.userInfo;
+          dispatch(
+            setUser({
+              id: _id,
+              name,
+              lastName,
+              contacts,
+            })
+          );
           router.push("/user/" + resp.data.userInfo._id);
           btn.target.form.offsetParent.style.display = "none";
         })

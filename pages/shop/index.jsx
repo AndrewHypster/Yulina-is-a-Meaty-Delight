@@ -1,5 +1,3 @@
-"use client";
-
 import Banner from "@/components/banner";
 import { CardProduct } from "@/components/card-product";
 import Footer from "@/components/footer";

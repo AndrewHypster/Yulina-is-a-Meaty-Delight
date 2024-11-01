@@ -1,5 +1,3 @@
-"use client";
-
 import MyHead from "@/components/myHead";
 
 export default function LoadingPage() {

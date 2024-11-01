@@ -1,22 +1,22 @@
-'use client'
-
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface PathState {
-  photo: string
+  photo: string;
 }
 
 const initialState: PathState = {
-  photo: ''
-}
+  photo: "",
+};
 
 export const pathSlice = createSlice({
-  name: 'path',
+  name: "path",
   initialState,
   reducers: {
-    setPath: (state, action) => {state.photo = action.payload},
-  }
-})
+    setPath: (state, action) => {
+      state.photo = action.payload;
+    },
+  },
+});
 
-export const { setPath } = pathSlice.actions
-export default pathSlice.reducer
+export const { setPath } = pathSlice.actions;
+export default pathSlice.reducer;

@@ -1,5 +1,3 @@
-"use client";
-
 import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice.tsx";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

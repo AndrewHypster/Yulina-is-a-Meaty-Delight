@@ -1,4 +1,3 @@
-"use client";
 // Create gmail-bot: https://www.youtube.com/watch?v=cqdAS49RthQ&ab_channel=WittCode
 import nodemailer from "nodemailer";
 
@@ -25,19 +24,14 @@ export default async function handler(req, res) {
     try {
       // Відправка листа
       await transporter.sendMail(mailOptions);
-      res
-        .status(200)
-        .json({
-          message: `Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося`,
-        });
+      res.status(200).json({
+        message: `Вашу заявку успішно відправлено! В продовж дня ми з вами звяжемося`,
+      });
     } catch (error) {
-      res
-        .status(500)
-        .json({
-          message:
-            "Проблема з сервером, спробуйте пізніше, або звяжіться з нами",
-          error,
-        });
+      res.status(500).json({
+        message: "Проблема з сервером, спробуйте пізніше, або звяжіться з нами",
+        error,
+      });
     }
   } else {
     res.status(405).json({ message: "Method not allowed" });

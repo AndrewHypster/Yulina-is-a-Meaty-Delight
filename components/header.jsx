@@ -1,12 +1,10 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import SignIn from "@/components/sign/in";
 import SocialIcons from "./social-icons";
 import Register from "./sign/register";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPath } from "@/redux_toolkit/features/path/pathSlice.tsx";
 import ModalWindow from "./modal-window";
@@ -15,7 +13,7 @@ export default function Header() {
   const router = useRouter();
   const dispatch = useDispatch();
   const pathPhoto = useSelector((state) => state.path.photo);
-  const [isUser, setIsUser] = useState(localStorage.getItem("userInfo"));
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     const updatePath = () => {
@@ -26,15 +24,11 @@ export default function Header() {
       dispatch(setPath(newPath));
     };
     updatePath();
-
-    if (localStorage.getItem("userInfo")) setIsUser(true);
   }, []);
 
   const autorise = () => {
-    const userID = JSON.parse(localStorage.getItem("userInfo"))?._id;
-
-    if (userID) {
-      router.push(`/user/${userID}`);
+    if (user.id) {
+      router.push(`/user/${user.id}`);
     } else {
       document.querySelector("#sign-in").style.display = "flex";
     }
@@ -64,7 +58,7 @@ export default function Header() {
         </div>
 
         <div className="hidden xl:flex items-end gap-2">
-          {isUser ? (
+          {user.id ? (
             <Link href="/shop/basket">
               <Image
                 src={pathPhoto + "icons/basket.svg"}

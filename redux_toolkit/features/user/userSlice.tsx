@@ -1,31 +1,24 @@
-"use client";
-
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+let id, name, lastName, contacts;
+if (typeof window !== "undefined") {
+  ({ id, name, lastName, contacts } = JSON.parse(
+    localStorage.getItem("persist:user") || "{}"
+  ));
+}
 
 interface UserState {
   id: string;
   name: string;
   lastName: string;
-  contacts: {
-    phone: string;
-    telegram: string;
-    gmail: string;
-  };
+  contacts: object;
 }
 
 const initialState: UserState = {
-  id: JSON.parse(localStorage.getItem("persist:user"))?.id || "",
-  name: JSON.parse(localStorage.getItem("persist:user"))?.name || "",
-  lastName: JSON.parse(localStorage.getItem("persist:user"))?.lastName || "",
-  contacts: {
-    phone:
-      JSON.parse(localStorage.getItem("persist:user"))?.contacts?.phone || "",
-    telegram:
-      JSON.parse(localStorage.getItem("persist:user"))?.contacts?.telegram ||
-      "",
-    gmail:
-      JSON.parse(localStorage.getItem("persist:user"))?.contacts?.gmail || "",
-  },
+  id,
+  name,
+  lastName,
+  contacts,
 };
 
 const userSlice = createSlice({

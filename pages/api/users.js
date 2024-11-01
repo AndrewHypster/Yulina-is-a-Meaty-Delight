@@ -1,4 +1,3 @@
-"use client";
 const { default: mongoose } = require("mongoose");
 import { userSchema } from "@/pages/api/mongoSchems";
 
@@ -35,7 +34,7 @@ export default async function Users(req, res) {
 
           user
             .save()
-            .then((result) => res.send("Успішно зареєстровано!"))
+            .then((result) => res.send(result))
             .catch((error) => {
               console.log(error);
             })

@@ -1,30 +1,12 @@
-"use client";
-
 import Footer from "@/components/footer";
 import Header from "@/components/header";
 import MyHead from "@/components/myHead";
-import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export default function User() {
-  const router = useRouter();
-  const [userInfo, setUserInfo] = useState({});
-
-  useEffect(() => {
-    const { id } = router.query;
-    axios
-      .post("/api/users?work=get-user", {
-        userID: id,
-      })
-      .then((resp) => {
-        setUserInfo(resp.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [router.query.id]);
+  const user = useSelector((state) => state.user);
+  console.log("КОРИСТУВАЧ", user.id ?? false);
 
   return (
     <>
@@ -37,7 +19,7 @@ export default function User() {
             className="hidden md:block text-bodily text-7xl ml:text-8xl font-extrabold tracking-widest"
             style={{ WebkitTextStroke: "3px #654321" }}
           >
-            Мій
+            {user.id ? "Мій" : "А ти"}
           </h1>
           {/* Центральні фото */}
           <div className="h-[270px] w-[335px] 3sm:w-[392px] absolute top-1 lg:top-0 right-1/2 translate-x-1/2 grid justify-items-center">
@@ -76,7 +58,7 @@ export default function User() {
             className="hidden md:block text-bodily text-7xl ml:text-8xl font-extrabold tracking-widest"
             style={{ WebkitTextStroke: "3px #654321" }}
           >
-            Дім
+            {user.id ? "Дім" : "Хто?"}
           </h1>
           <Image
             src="/icons/meatL.svg"
@@ -100,7 +82,7 @@ export default function User() {
               Замовлення
             </h2>
             <ul className="grid gap-3.5 text-bodily">
-              {userInfo.orders?.map((order) => {
+              {user.orders?.map((order) => {
                 <li className="max-w-md">
                   <div className="flex justify-between gap-8">
                     <div className="">
@@ -156,7 +138,7 @@ export default function User() {
                     Ім&apos;я
                   </h3>
                   <p>
-                    {userInfo.name} {userInfo.lastName}
+                    {user.name} {user.lastName}
                   </p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
@@ -166,7 +148,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     День народження
                   </h3>
-                  <p>{userInfo.birthday}</p>
+                  <p>{user.birthday}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -175,7 +157,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телефон
                   </h3>
-                  <p>{userInfo.contacts ? userInfo.contacts.phone : ""}</p>
+                  <p>{user.contacts?.phone || ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -184,7 +166,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Телеграм
                   </h3>
-                  <p>{userInfo.contacts ? userInfo.contacts.telegram : ""}</p>
+                  <p>{user.contacts?.telegram || ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>
@@ -193,7 +175,7 @@ export default function User() {
                   <h3 className="h-fit font-pt-sans-narrow text-3xl ml:text-2xl xl1:text-3xl 3xl:text-4xl">
                     Пошта
                   </h3>
-                  <p>{userInfo.contacts ? userInfo.contacts.malto : ""}</p>
+                  <p>{user.contacts?.malto || ""}</p>
                 </div>
                 <div className="w-full mt-[7.5px] h-[1px] bg-bodily" />
               </li>

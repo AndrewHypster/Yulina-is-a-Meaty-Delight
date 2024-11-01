@@ -1,5 +1,3 @@
-"use client";
-
 import { LoadingCards } from "@/components/card-product";
 
 export default function TestPage() {

@@ -1,5 +1,3 @@
-"use client";
-
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import { persistStore, persistReducer } from "redux-persist";
@@ -11,7 +9,7 @@ import modalReducer from "./features/modal-window/modalSlice.tsx";
 
 const persistConfig = {
   key: "user",
-  storage, // Використовує localStorage для збереження даних
+  storage: storage, // Використовує localStorage для збереження даних
 };
 
 // Об'єднайте редюсери
@@ -20,9 +18,6 @@ const rootReducer = combineReducers({
   path: pathReducer,
   modal: modalReducer,
 });
-
-// Створіть збережений редюсер
-const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Створіть функцію для налаштування store
 export const makeStore = () =>
@@ -34,8 +29,10 @@ export const makeStore = () =>
       }),
   });
 
-// Створіть обгортку для Next.js з redux-persist
-export const wrapper = createWrapper(makeStore);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// Створіть persistor для використання в додатку
-export const persistor = persistStore(makeStore());
+export const store = configureStore({
+  reducer: persistedReducer,
+});
+
+export const persistor = persistStore(store);
