@@ -15,8 +15,8 @@ export default function Basket() {
               Кошик ласощів (20)
             </h2>
             <ul className="grid gap-6 py-6 bg-my-white">
-              {new Array(5).fill(0).map(() => (
-                <li className="max-w-2xl w-screen">
+              {new Array(5).fill(0).map((e, key) => (
+                <li className="max-w-2xl w-screen" key={key}>
                   <div className="flex gap-4 relative">
                     <Image src="/imgs/tovar/0.png" height="108" width="108" />
 
