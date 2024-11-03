@@ -112,4 +112,4 @@ function LoadingCircles({ size = 10 }) {
   );
 }
 
-export { CardProduct, LoadingCards };
+export { CardProduct, LoadingCards, LoadingCircles };
