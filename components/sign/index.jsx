@@ -51,13 +51,14 @@ export default function Sign({ type }) {
           password: password.value,
         })
         .then((resp) => {
-          const { _id, name, lastName, contacts } = resp.data.userInfo;
+          const { _id, name, lastName, contacts, basket } = resp.data.userInfo;
           dispatch(
             setUser({
               id: _id,
               name,
               lastName,
               contacts,
+              basket,
             })
           );
           router.push("/user/" + resp.data.userInfo._id);

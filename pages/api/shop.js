@@ -40,35 +40,6 @@ export default async function Users(req, res) {
           });
       }
 
-      //       kind
-      // "Міні сосиски"
-      // name
-      // "Гарячі яловичі палички"
-      // cost
-      // 580
-      // description
-      // "Густий і жувальний з часниково-імбирною сумішшю та пуншем із кунжутним…"
-      // photoUrl
-      // "https://peopleschoicebeefjerky.com/cdn/shop/files/TastingKitchen_Sweet…"
-      // isTop
-      // true
-
-      // reviews
-      // Array (5)
-
-      // 0
-      // Object
-      // userName
-      // "Андрій Г."
-      // rating
-      // 5
-      // comment
-      // "Думав що буде сухе та не перержовуватиметься, та всеж воно мені зайшло…"
-      // _id
-      // 66ffc1b7f1bcba7e3574b8ad
-      // date
-      // 2024-10-04T10:21:43.270+00:00
-
       // G E T   P R O D U C T S
       if (req.query.work === "get-products") {
         try {

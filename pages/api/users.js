@@ -141,6 +141,54 @@ export default async function Users(req, res) {
         }
         deleteUserById();
       }
+
+      // A D D   B A S K E T
+      else if (req.query.work === "add-basket") {
+        const { userId, item } = req.body;
+        async function addItemToBasket() {
+          try {
+            const result = await User.updateOne(
+              { _id: userId }, // Знаходимо користувача за його ID
+              { $push: { basket: item } } // Додаємо товар до масиву basket
+            );
+            res.send({
+              message: "Успішно додано до кошика",
+            });
+          } catch (err) {
+            return res
+              .status(400)
+              .json({ error: `Помилка при додаванні товру в кошик: ${err}` });
+          } finally {
+            await mongoose.connection.close();
+            console.log("Close User DB add to basket");
+          }
+        }
+        addItemToBasket();
+      }
+
+      // D E L E T E   B A S K E T
+      else if (req.query.work === "delete-basket") {
+        const { userId, productId } = req.body;
+        async function deleteItemFromBasket() {
+          try {
+            const result = await User.updateOne(
+              { _id: userId }, // Знаходимо користувача за його ID
+              { $pull: { basket: { _id: productId } } } // Видаляємо товар за його айді
+            );
+            res.send({
+              message: userId + " Успішно видалено з кошика " + productId,
+            });
+          } catch (err) {
+            return res
+              .status(400)
+              .json({ error: `Помилка при видаленні товру з кошика: ${err}` });
+          } finally {
+            await mongoose.connection.close();
+            console.log("Close User DB delete from basket");
+          }
+        }
+        deleteItemFromBasket();
+      }
     }
   } catch (error) {
     console.error("Error connecting to User DB:", error);

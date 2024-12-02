@@ -17,12 +17,15 @@ import "swiper/css/scrollbar";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setModal } from "@/redux_toolkit/features/modal-window/modalSlice";
+import { addToBasket } from "@/redux_toolkit/features/user/userSlice";
 
 export default function Tovar() {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  const userId = useSelector((state) => state.user.id);
   const [product, setProduct] = useState();
 
   const [weight, setWeight] = useState({ count: 100, type: 1 });
@@ -98,6 +101,57 @@ export default function Tovar() {
         })
       );
     }
+  };
+
+  const toBasket = () => {
+    axios
+      .post(
+        "/api/users?work=add-basket",
+        {
+          userId: userId,
+          item: {
+            productID: product._id,
+            kind: product.kind,
+            name: product.name,
+            cost: product.cost,
+            weight: weight.count * weight.type,
+          },
+        },
+        {
+          "Content-Type": "application/json",
+        }
+      )
+      .then((response) => {
+        console.log("Респонс відповідь", response.data);
+        dispatch(
+          setModal({
+            type: "Success",
+            text: response.data.message,
+          })
+        );
+
+        dispatch(
+          addToBasket({
+            basket: {
+              productID: product._id,
+              kind: product.kind,
+              name: product.name,
+              cost: product.cost,
+              weight: weight.count * weight.type,
+            },
+          })
+        );
+      })
+      .catch((error) => {
+        console.error("There was an error!", error);
+        document.body.style = "overflow: hidden";
+        dispatch(
+          setModal({
+            type: "Error",
+            text: `Error ${error.response.status}: ${error.response.data.message}`,
+          })
+        );
+      });
   };
 
   if (loading) return <LoadingPage />;
@@ -238,7 +292,7 @@ export default function Tovar() {
                     className="max-w-44 focus-visible:outline-0 text-center text-my-black font-inter tracking-tight text-3xl"
                     onChange={({ target }) =>
                       setWeight({
-                        count: target.value ? target.value : 100,
+                        count: target.value ?? 100,
                         type: weight.type,
                       })
                     }
@@ -258,14 +312,26 @@ export default function Tovar() {
                     <option value="кг">КГ</option>
                   </select>
                 </div>
-
-                <button
-                  type="button"
-                  className="w-80 ml:w-96 h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
-                  onClick={sendTgBot}
-                >
-                  КУПИТИ
-                </button>
+                <div className="grid grid-cols-2 gap-8">
+                  <a href="">
+                    <button
+                      type="button"
+                      className="w-full h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
+                      onClick={sendTgBot}
+                    >
+                      КУПИТИ
+                    </button>
+                  </a>
+                  <a href="#">
+                    <button
+                      type="button"
+                      className="w-full h-16 mt-8 bg-my-green rounded-full text-my-white font-inter font-extrabold text-2xl tracking-[0.12em] block"
+                      onClick={toBasket}
+                    >
+                      В кошик
+                    </button>
+                  </a>
+                </div>
               </form>
             </section>
 

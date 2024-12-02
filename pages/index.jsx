@@ -111,9 +111,11 @@ export default function Home() {
                   </div>
                 </SwiperSlide>
               ))
-            : new Array(slides+1).fill(0).map((e, key) => (
+            : new Array(slides + 1).fill(0).map((e, key) => (
                 <SwiperSlide key={key}>
-                  <LoadingCards />
+                  <div className="w-fit mx-auto">
+                    <LoadingCards />
+                  </div>
                 </SwiperSlide>
               ))}
         </Swiper>

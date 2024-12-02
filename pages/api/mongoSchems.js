@@ -30,6 +30,30 @@ const userSchema = new Schema({
     },
     required: true,
   },
+  basket: [
+    {
+      productID: {
+        type: String,
+        required: true,
+      },
+      kind: {
+        type: String,
+        required: true,
+      },
+      name: {
+        type: String,
+        required: true,
+      },
+      cost: {
+        type: Number,
+        required: true,
+      },
+      weight: {
+        type: Number,
+        required: true,
+      },
+    },
+  ],
   birthDay: {
     type: String,
   },

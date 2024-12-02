@@ -41,13 +41,13 @@ export default function Shop() {
         <MyHead title="Магазин" />
         <Header />
         <Banner />
-        <div className="flex pr-36">
+        <div className="flex">
           <div className="w-36 justify-center place-items-center hidden md:grid">
             <div className="grid h-fit gap-10 grid-flow-row-dense">
               <SocialIcons initsize="36" styles="rotate-[270deg]" />
             </div>
           </div>
-          <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center md:justify-start">
+          <div className="flex flex-wrap w-fit mx-auto gap-10 py-10 justify-center">
             {products?.map((product, index) => (
               <CardProduct
                 key={index}
