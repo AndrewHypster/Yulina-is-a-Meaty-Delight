@@ -24,13 +24,14 @@ export default function Sign({ type }) {
           },
         })
         .then((response) => {
-          const { _id, name, lastName, contacts } = response.data;
+          const { _id, name, lastName, contacts, basket } = response.data;
           dispatch(
             setUser({
               id: _id,
               name,
               lastName,
               contacts,
+              basket,
             })
           );
 

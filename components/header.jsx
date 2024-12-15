@@ -27,8 +27,10 @@ export default function Header() {
   }, []);
 
   const autorise = () => {
+    console.log(user);
+
     if (user.id) {
-      router.push(`/user/${user.id}`);
+      router.push(`/user/${user.lastName}_${user.name}`);
     } else {
       document.querySelector("#sign-in").style.display = "flex";
     }
@@ -103,6 +105,8 @@ export default function Header() {
             <a href="#" onClick={() => autorise()}>
               Кабінет
             </a>
+            <hr />
+            {user.id ? <Link href="/shop/basket">Кошик</Link> : <></>}
             <hr />
             <Link href="/shop">Продукція</Link>
             <hr />

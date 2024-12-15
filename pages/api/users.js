@@ -29,7 +29,7 @@ export default async function Users(req, res) {
             lastName,
             password,
             contacts,
-            isAutorise: false,
+            basket: [],
           });
 
           user
@@ -40,7 +40,7 @@ export default async function Users(req, res) {
             })
             .finally(() => {
               mongoose.connection.close();
-              console.log("Close User DB");
+              console.log("Close User DB create new user");
             });
         }
       }
@@ -59,7 +59,7 @@ export default async function Users(req, res) {
             console.error("Помилка при оновленні:", err);
           } finally {
             await mongoose.connection.close();
-            console.log("Close User DB");
+            console.log("Close User DB change user");
           }
         }
         updateUser();
@@ -76,7 +76,7 @@ export default async function Users(req, res) {
           res.send(finded);
         }
         await mongoose.connection.close();
-        console.log("Close User DB");
+        console.log("Close User DB get user");
       }
 
       // A U T H O R I S E   U S E R
@@ -168,15 +168,15 @@ export default async function Users(req, res) {
 
       // D E L E T E   B A S K E T
       else if (req.query.work === "delete-basket") {
-        const { userId, productId } = req.body;
+        const { userId, _id } = req.body;
         async function deleteItemFromBasket() {
           try {
             const result = await User.updateOne(
               { _id: userId }, // Знаходимо користувача за його ID
-              { $pull: { basket: { _id: productId } } } // Видаляємо товар за його айді
+              { $pull: { basket: { _id } } } // Видаляємо товар за його айді
             );
             res.send({
-              message: userId + " Успішно видалено з кошика " + productId,
+              message: "Успішно видалено з кошика",
             });
           } catch (err) {
             return res

@@ -38,7 +38,6 @@ export default function Tovar() {
   }, []);
 
   useEffect(() => {
-    console.log(router.query.id);
     if (router.query.id)
       axios
         .post("/api/shop?work=get-product", { id: router.query.id })

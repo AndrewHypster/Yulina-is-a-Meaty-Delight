@@ -57,10 +57,6 @@ const userSchema = new Schema({
   birthDay: {
     type: String,
   },
-  isAutorise: {
-    type: Boolean,
-    required: true,
-  },
 });
 
 const productSchema = new Schema({
